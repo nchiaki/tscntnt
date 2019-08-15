@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TSパケット:ヘッダー:アダプテーションフィールド:オプションフィールド
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<link rel="stylesheet" href="tsstyle.css" type="text/css">
+</head>
+
+<body>
+<h1><a href="index.html">TSパケット:ヘッダー</a>:
+		<a href="tsadaptationfiled.html">アダプテーションフィールド</a>:オプションフィールド</h1>
+<h2>オプションフィールド</h2>
+<p>
+<table border=1>
+<tr><th></th>
+	<th colspan=48 class=packname>
+	オプションフィールド（(111+α)bits）
+	</th>
+</tr>
+<tr class=bits><th>bits</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+<!--
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	
+	<th></th>
+-->
+</tr>
+<!--
+<tr><th></th>
+	<th colspan=48 class=bits42>48(42)</th>
+		<th colspan=48 class=bits42>48(42)</th>
+			<th colspan=8 class=bits8>8</th>
+				<th colspan=8 class=bits8>8</th>
+					<th class=bits10>α</th>
+						<th class=bits8>8</th>
+							<th class=bits3>3</th>
+								<th class=bits10>β</th>
+</tr>
+-->
+<tr class=dataname><th rowspan=2 >PCR flag=1</th>
+	<td colspan=48 class=dataname><a href="#">PCR 48(42) bits</a></td>
+<!--
+	<td colspan=48 class=dataname><a href="#">OPCR</a></td>
+	<td colspan=8 class=dataname><a href="#">スプライスカウントダウン</a></td>
+	<td colspan=8 class=dataname><a href="#">トランスポートプライベートデータ長</a></td>
+	<td class=dataname><a href="#">トランスポートプライベートデータ</a></td>
+	<td class=dataname><a href="#">アダプテーションフィールド拡張長さ</a></td>
+	<td class=dataname><a href="#">3フラグ</a></td>
+	<td class=dataname><a href="#">オプションフィールド</a></td>
+-->
+</tr>
+<tr class=dataname>
+	<td colspan=33 class=dataname><a href="#">PCR base 33bits</a></td>
+	<td colspan=6 class=dataname><a href="#">reserved 6bits</a></td>
+	<td colspan=9 class=dataname><a href="#">PCR extension 9bits</a></td>
+</tr>
+
+<tr class=dataname><th rowspan=2 >OPCR flag=1</th>
+	<td colspan=48 class=dataname><a href="#">OPCR  48(42) bits</a></td>
+</tr>
+<tr class=dataname>
+	<td colspan=33 class=dataname><a href="#">OPCR base 33bits</a></td>
+	<td colspan=6 class=dataname><a href="#">reserved 6bits</a></td>
+	<td colspan=9 class=dataname><a href="#">OPCR extension 9bits</a></td>
+</tr>
+
+<tr class=dataname><th>スプライスポイントflag=1</th>
+	<td colspan=8 class=dataname><a href="#">スプライスカウントダウン 8bits</a></td>
+</tr>
+<tr class=dataname><th>トランスポートプライベートデータflag=1</th>
+	<td colspan=8 class=dataname><a href="#">トランスポートプライベートデータ長 8bits</a></td>
+	<td colspan=40 class=dataname><a href="#">トランスポートプライベートデータ (トランスポートプライベートデータ長 bytes) </a></td>
+</tr>
+<tr class=dataname><th>アダプテーションフィールド拡張flag=1</th>
+	<td colspan=8 class=dataname><a href="#">アダプテーションフィールド拡張長 8bits</a></td>
+	<td colspan=1 class=dataname><a href="#">I<br>T<br>W<br>フ<br>ラ<br>グ</a></td>
+	<td colspan=1 class=dataname><a href="#">ピ<br>ー<br>ス<br>ワ<br>イ<br>ズ<br>レ<br>ー<br>ト<br>フ<br>ラ<br>グ</a></td>
+	<td colspan=1 class=dataname><a href="#">シ<br>ー<br>ム<br>レ<br>ス<br>ス<br>プ<br>ラ<br>イ<br>ス<br>フ<br>ラ<br>グ</a></td>
+	<td colspan=5 class=dataname><a href="#">reserved</a></td>
+	<td colspan=32 class=dataname><a href="tsoptionfild1.html" target=adptex>アダプテーション拡張データ((アダプテーションフィールド拡張長-1)bytes)</a></td>
+</tr>
+
+</table>
+
+<h4><a name="adptlen">オプションフィールド:PCR</a></h4>
+<p>
+<div>Program Clock Reference（プログラム時刻基準値）。</div>
+<div>27MHz現在時刻</div>
+</p>
+
+<h4><a name="adptlen">オプションフィールド:OPCR</a></h4>
+<p>
+<div>Original Program Clock Reference（プログラム時刻基準値）。</div>
+<div>PCR付け替え時等に以前のPCR値を残して置く。</div>
+</p>
+
+<h4><a name="adptlen">オプションフィールド:スプライスカウントダウン</a></h4>
+<p>
+<div>編集ポイントまでの同一PIDでのTSパケット数</div>
+</p>
+
+<h4><a name="adptlen">オプションフィールド:トランスポートプライベートデータ長</a></h4>
+<p>
+<div>トランスポートプライベートデータの長さ</div>
+</p>
+
+<h4><a name="adptlen">オプションフィールド:トランスポートプライベートデータ</a></h4>
+<p>
+<div>TSパケットに挿入できるユーザー独自データ</div>
+</p>
+
+<h4><a name="adptlen">オプションフィールド:アダプテーションフィールド拡張長さ</a></h4>
+<p>
+<div>オプションフィールド:アダプテーションフィールド拡張の長さ</div>
+</p>
+
+</p>
+
+
+</body>
+</html>

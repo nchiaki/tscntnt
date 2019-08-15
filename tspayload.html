@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>TSパケット:ペイロード
+</title>
+<!-- content属性にページの紹介文を記述 -->
+<meta name="description" content="TSペイロード">
+<!-- content属性にページの著者情報を記述 -->
+<meta name="author" content="chiaki">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="tsstyle.css" type="text/css">
+
+</head>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+<body>
+<h1><a href="index.html">TSパケット</a>:ペイロード(STD-B32 / ITU-T H.222.0)</h1>
+<section>
+<p>
+セクション形式とPESパケットのに種類があり、PIDで区別する。
+</p>
+<p>
+「ペイロード開始表示」が'1'の時PESパケットの場合、データの先頭はペーロードの先頭から始まるが、セクション形式の場合は、ペイロードデータは更にポインターフィールド（1byte）とペイロードに解釈され、ポインターフィールドに示されるペイロード内位置より始まる。
+</P>
+<p>
+セクション形式、PESパケットの違いはPIDで行うため、PATを受信するまでは予約されたPID以外は確定する事が出来ず、仕様的にゆるい部分がある。
+</p>
+
+<h2>セクション形式</h2>
+<section>
+
+<h3>「ペイロード開始表示」が'1'の時のペイロードの仕切り直し</h3>
+<section>
+<table border=1>
+<tr  class=bytes><th>bytes</th>
+	<th colspan= >+0</th>
+	<th colspan= >+1</th>
+	<th colspan= >+(1+&lt;PF&gt;)</th>
+</tr>
+<tr  class=bits><th>bit<br>size</th>
+	<th colspan= class=bits8>8</th><!-- ポインターフィールド -->
+	<th colspan=3 class=bits8>8*(M-1)</th><!-- ペイロード -->
+</tr>
+<tr class=dataname><th></th>
+	<td colspan= class=dataname>ポインター<br>フィールド<br>(PF)</td>
+	<td colspan= class=dataname>ペイロード</td>
+	<td colspan= class=dataname>(セクションデータの<br>開始位置)</td>
+</tr>
+</table>
+<p>
+M : ペイロード総バイトサイズ
+</p>
+
+</section>
+
+<h3>通常形式</h3>
+<section>
+<table border=1>
+<tr><th colspan=7 class=packname>
+	通常形式セクション
+</th>
+<tr  class=bytes><th>bytes</th>
+	<th colspan= >+0</th>
+	<th colspan=3 >+1</th>
+	<th colspan= >+3</th>
+	<th colspan= >+(3+N)</th>
+</tr>
+<tr  class=bits><th>bit<br>size</th>
+	<th colspan= class=bits8>8</th><!-- テーブル識別子 -->
+	<th colspan= class=bits8>1</th><!-- セクションシンタックス指示 -->
+	<th colspan= class=bits8>3</th><!-- 予約 -->
+	<th colspan= class=bits8>12</th><!-- セクション長 -->
+	<th colspan= class=bits8>8*N</th><!-- データ -->
+	<th colspan= class=bits8>8*(M-(3+N))</th><!-- データ -->
+</tr>
+<tr class=dataname><th></th>
+	<td colspan= class=dataname>テーブル識別子</td>
+	<td colspan= class=dataname>セクション<br>シンタックス指示</td>
+	<td colspan= class=dataname>予約<br>(0x7)</td>
+	<td colspan= class=dataname>セクション長(N)</td>
+	<td colspan= class=dataname>バイトデータ</td>
+	<td colspan= class=dataname>スタッフィングデータ<br>(0xff)</td>
+</tr>
+<tr class=dataname>
+	<td colspan=2 ></td>
+	<td>0</td>
+	<td colspan=2></td>
+	<td>xN</td>
+	<td></td>
+</tr>
+</table>
+<p>
+M : ペイロードバイトサイズ
+</p>
+</section>
+
+<h3>拡張形式</h3>
+<section>
+<table border=1>
+<tr><th colspan=14 class=packname>
+	拡張形式セクション
+</th>
+<tr  class=bytes><th>bytes</th>
+	<th colspan= >+0</th>
+	<th colspan=3 >+1</th>
+	<th colspan= >+3</th>
+	<th colspan=3 >+5</th>
+	<th colspan= >+6</th>
+	<th colspan= >+7</th>
+	<th colspan= >+8</th>
+	<th colspan= >+(8+N)</th>
+	<th colspan= >+(8+N+4)</th>
+</tr>
+<tr  class=bits><th>bit<br>size</th>
+	<th colspan= class=bits8>8</th><!-- テーブル識別子 -->
+	<th colspan= class=bits8>1</th><!-- セクションシンタックス指示 -->
+	<th colspan= class=bits8>3</th><!-- 予約 -->
+	<th colspan= class=bits8>12</th><!-- セクション長 -->
+	<th colspan= class=bits8>16</th><!-- テーブル拡張子 -->
+	<th colspan= class=bits8>2</th><!-- 予約 -->
+	<th colspan= class=bits8>5</th><!-- バージョン番号 -->
+	<th colspan= class=bits8>1</th><!-- カレントネキスト指示 -->
+	<th colspan= class=bits8>8</th><!-- セクション番号 -->
+	<th colspan= class=bits8>8</th><!-- 最終セクション番号 -->
+	<th colspan= class=bits8>8*N</th><!-- データ -->
+	<th colspan= class=bits8>32</th><!-- CRC -->
+	<th colspan= class=bits8>8*(M-(8+N+4))</th><!-- データ -->
+</tr>
+<tr class=dataname><th></th>
+	<td colspan= class=dataname>テーブル識別子</td>
+	<td colspan= class=dataname>セクション<br>シンタックス指示</td>
+	<td colspan= class=dataname>予約1<br>(0x7)</td>
+	<td colspan= class=dataname>セクション長<br>(N+5+4)</td>
+	<td colspan= class=dataname>テーブル拡張子</td>
+	<td colspan= class=dataname>予約2<br>(0x3)</td>
+	<td colspan= class=dataname>バージョン<br>番号</td>
+	<td colspan= class=dataname>カレント<br>ネキスト<br>指示</td>
+	<td colspan= class=dataname>セクション番号</td>
+	<td colspan= class=dataname>最終<br>セクション番号</td>
+	<td colspan= class=dataname>バイトデータ</td>
+	<td colspan= class=dataname>CRC</td>
+	<td colspan= class=dataname>スタッフィングデータ<br>(0xff)</td>
+</tr>
+<tr class=dataname>
+	<td colspan=2></td>
+	<td>1</td>
+	<td colspan=8></td>
+	<td>xN</td>
+	<td colspan=2></td>
+</tr>
+</table>
+<p>
+M : ペイロードバイトサイズ
+</p>
+</section>
+
+<h4>PAT</h4>
+<section>
+
+<div>
+<table border=1>
+<tr><th colspan=6 class=packname>
+	PATセクション(64+(16+3+13)n+32)
+	</th>
+</tr>
+<tr  class=bytes><th>bytes</th>
+	<th colspan= >+0</th>
+	<th colspan= >+(8+(4*(N-1)))</th>
+	<th colspan=2 >+(10+(4*(N-1)))</th>
+	<th colspan= >+(8+(4*N))</th>
+</tr>
+<tr  class=bits><th>bit<br>size</th>
+	<th colspan= class=bits8>64</th><!-- 拡張形式ヘッダー -->
+	<th colspan= class=bits8>16</th><!-- 放送番組識別子 -->
+	<th colspan= class=bits8>3</th><!-- 予約ビット -->
+	<th colspan= class=bits8>13</th><!-- NW PID/PMT PID -->
+	<th colspan= class=bits8>32</th><!-- 32 -->
+</tr>
+<tr class=dataname><th></th>
+	<td colspan= class=dataname>拡張形式セクションヘッダー</td>
+	<td colspan= class=dataname>放送番組番号識別子</td>
+	<td colspan= class=dataname>予約<br>(0x7)</td>
+	<td colspan= class=dataname>NW PID/PMT PID</td>
+	<td colspan= class=dataname>CRC</td>
+</tr>
+<tr><th colspan=2></th>
+	<th colspan=3>xN</th>
+	<th></th>
+</tr>
+</table>
+<p>
+「拡張形式セクションヘッダー」における「テーブル識別子」は 0x00
+「拡張形式セクションヘッダー」における「予約1」の値は 0x3 とする
+「放送番組番号識別子」 0 はNIT用、「NW PID/PMT PID」は NIT PID となる（固定値 0x0010）
+「放送番組番号識別子」 0 以外の「NW PID/PMT PID」は PMT PID となる
+</p>
+</div>
+
+</section>
+
+<h4>PMT</h4>
+<section>
+<div>
+<table border=1>
+<tr><th colspan=15 class=packname>
+	PMTセクション
+	</th>
+</tr>
+<tr  class=bytes><th>bytes</th>
+	<th colspan= >+0</th>
+	<th colspan=2 >+8</th>
+	<th colspan=2 >+10</th>
+	<th colspan= >+12</th>
+	<th colspan= >+13</th>
+	<th colspan=2 >+(13+L1)</th>
+	<th colspan=2 >+((13+L1)+2)</th>
+	<th colspan= >+(((13+L1)+2)+2)</th>
+	<th colspan= >+(((((13+L1)+2)+2)+L2)*N)</th>
+</tr>
+<tr  class=bits><th>bit<br>size</th>
+	<th colspan= class=bits8>64</th><!-- 拡張形式ヘッダー -->
+	<th colspan= class=bits8>3</th><!--  -->
+	<th colspan= class=bits8>13</th><!--  -->
+	<th colspan= class=bits8>4</th><!--  -->
+	<th colspan= class=bits8>12</th><!--  -->
+	<th colspan= class=bits8>(L1x8)</th><!--  -->
+	<th colspan= class=bits8>8</th><!--  -->
+	<th colspan= class=bits8>3</th><!--  -->
+	<th colspan= class=bits8>13</th><!--  -->
+	<th colspan= class=bits8>4</th><!--  -->
+	<th colspan= class=bits8>12</th><!--  -->
+	<th colspan= class=bits8>(L2x8)</th><!--  -->
+	<th colspan= class=bits8>32</th><!--  -->
+</tr>
+<tr class=dataname><th></th>
+	<td colspan= class=dataname>拡張形式セクションヘッダー</td>
+	<td colspan= class=dataname>0x7</td>
+	<td colspan= class=dataname>PCR PID</td>
+	<td colspan= class=dataname>0xf</td>
+	<td colspan= class=dataname>番組情報長(L1)</td>
+	<td colspan= class=dataname>記述子1</td>
+	<td colspan= class=dataname>ストリーム形式記述子</td>
+	<td colspan= class=dataname>0x7</td>
+	<td colspan= class=dataname>エレメンタリーPID</td>
+	<td colspan= class=dataname>0xf</td>
+	<td colspan= class=dataname>ES情報長(L2)</td>
+	<td colspan= class=dataname>記述子2</td>
+	<td colspan= class=dataname>CRC</td>
+</tr>
+<tr><th colspan=7></th>
+	<th colspan=6>xN</th>
+	<th></th>
+	</tr>
+</table>
+<p>
+「拡張形式セクションヘッダー」における「テーブル識別子」は 0x02
+「拡張形式セクションヘッダー」における「予約1」の値は 0x3 とする
+</p>
+</div>
+</section>
+
+</section>
+
+<h2>PESパケット</h2>
+<section>
+</section>
+
+</section>
+
+
+</body>
+</html>

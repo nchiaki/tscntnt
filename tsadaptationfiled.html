@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>TSパケット:ヘッダー:アダプテーションフィールド
+</title>
+<!-- content属性にページの紹介文を記述 -->
+<meta name="description" content="TSアダプテーションフィールドフォーマット">
+<!-- content属性にページの著者情報を記述 -->
+<meta name="author" content="chiaki">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="tsstyle.css" type="text/css">
+
+</head>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+<body>
+<h1><a href="index.html">TSパケット:ヘッダー</a>:アダプテーションフィールド</h1>
+<h2>アダプテーションフィールド</h2>
+<section>
+
+<div>
+<table border=1>
+<tr><th colspan=19 class=packname>
+	アダプテーションフィールド（(16+α+β)bits）
+	</th>
+</tr>
+<!--
+<tr class=bits><th>bits</th>
+	<th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th>
+	<th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th>
+	<th></th><th></th>
+</tr>
+-->
+<tr class=bits><th>bits</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th></th><th></th>
+</tr>
+<tr class=bytes><th>bytes</th><th colspan=8>+4</th><th colspan=8>+5</th>
+	<th></th><th></th>
+</tr>
+<tr><th>bitSize</th>
+	<th colspan=8 class=bits8>8</th>
+		<th class=bits1>1</th>
+			<th class=bits1>1</th>
+				<th class=bits1>1</th>
+				
+					<th class=bits1>1</th>
+					<th class=bits1>1</th>
+					<th class=bits1>1</th>
+					<th class=bits1>1</th>
+					<th class=bits1>1</th>
+				
+						<th class=bits10>α</th>
+							<th class=bits20>β</th>
+</tr>
+<tr class=dataname><th></th>
+	<td colspan=8 class=dataname><a href="#adptlen">アダプテーションフィールド長</a></td>
+	<td class=dataname><a href="#discon">ディスコンティニュティ表示</a></td>
+	<td class=dataname><a href="#random">ランダムアクセス表示</a></td>
+	<td class=dataname><a href="#esprio">ESプライオリティ表示</a></td>
+	
+	<td class=dataname><a href="#pcrflg">P C R フラグ</a></td>
+	<td class=dataname><a href="#opcrflg">O P C R フラグ</a></td>
+	<td class=dataname><a href="#splicingpointflg">スプライスポイントフラグ</a></td>
+	<td class=dataname><a href="#transportprivatedataflg">トランスポートプライベートデータフラグ</a></td>
+	<td class=dataname><a href="#adaptfiledextflg">アダプテーションフィールド拡張フラグ</a></td>
+	
+	<td class=dataname><a href="tsoptionfild0.html" target=optfd>オプションフィールド</a></td>
+	<td class=dataname><a href="#staffing">スタッフィングバイト</a></td>
+</tr>
+</table>
+</div>
+
+<br>
+
+<div>
+<table border=1>
+<tr><th>名称</th><th>bits</th><th>内容</th>
+</tr>
+<tr><th>アダプテーションフィールド長</th><td class=bits>8</td><td>
+												<div>「ディスコンティニュティ表示」からのサイズ。</div>
+												<div>(=0)の時のアダプテーションフィールドには、「アダプテーションフィールド長」のみが存在する。</div>
+												</td>
+<tr><th rowspan=3>ディスコンティニュティ表示</th><td rowspan=3 class=bits>1</td><td>
+																<div>パケットの不連続を示す。</div>
+																<div>コンティニュティカウンタの値が不連続。</div>
+																<div>PCR値（オプションフィールド）が不連続。</div>
+																</td>
+</tr>
+<tr>                                                       <td>0::=連続中</td>
+</tr>
+<tr>                                                       <td>1::=不連続</td>
+</tr>
+<tr><th rowspan=3>ランダムアクセス表示</th><td rowspan=3 class=bits>1</td><td>
+													<div>転送中のESにランダムアクセス可能なポイントが含まれている事を示す。</div>
+													<div>シーケンスヘッダ先頭を含むPESがペイロードに含まれている時など。</div>
+													</td>
+</tr>
+<tr>                                                       <td>0::=ランダムアクセス可能なポイントが含まれていない</td>
+</tr>
+<tr>                                                       <td>1::=ランダムアクセス可能なポイントが含まれている</td>
+</tr>
+<tr><th rowspan=3>ESプライオリティ表示</th><td rowspan=3 class=bits>1</td><td>
+															<div>ペイロードプライオリティーを示す。</div>
+															</td>
+</tr>
+<tr>                                                       <td>0::=低い</td>
+</tr>
+<tr>                                                       <td>1::=高い</td>
+</tr>
+<tr><th rowspan=2>PCRフラグ</th><td rowspan=2 class=bits>1</td>
+														<td>0::=PCRフィールドは含まない</td>
+</tr>
+<tr>                                                    <td>1::=二つの部分でコード化されるPCRフィールドを含む</td>
+</tr>
+<tr><th rowspan=2>OPCRフラグ</th><td rowspan=2 class=bits>1</td>
+														<td>0::=OPCRフィールドは含まない</td>
+</tr>
+<tr>                                                    <td>1::=二つの部分でコード化されるOPCRフィールドを含む</td>
+</tr>
+<tr><th rowspan=2>スプライスポイントフラグ</th><td rowspan=2 class=bits>1</td>
+														<td>0::=スプライスカウントダウンフィールドを含まない</td>
+</tr>
+<tr>                                                    <td>1::=スプライスカウントダウンフィールドを含む</td>
+</tr>
+<tr><th rowspan=2>トランスポートプライベートデータフラグ</th><td rowspan=2 class=bits>1</td>
+														<td>0::=トランスポートプライベートデータを含まない</td>
+</tr>
+<tr>                                                    <td>1::=トランスポートプライベートデータを含む</td>
+</tr>
+<tr><th rowspan=2>アダプテーションフィールド拡張フラグ</th><td rowspan=2 class=bits>1</td>
+														<td>0::=アダプテーションフィールド拡張データを含まない</td>
+</tr>
+<tr>                                                    <td>1::=アダプテーションフィールド拡張データを含む</td>
+</tr>
+
+</table>
+</div>
+
+
+<h4><a name="staffing">アダプテーションフィールド:スタッフィングバイト</a></h4>
+<p>
+<div>スタッフィングデータ(0xFF)が詰まる。</div>
+</p>
+
+
+</section>
+
+
+</body>
+</html>

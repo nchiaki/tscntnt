@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>TSパケットフォーマット
+</title>
+<!-- content属性にページの紹介文を記述 -->
+<meta name="description" content="TSパケットフォーマット">
+<!-- content属性にページの著者情報を記述 -->
+<meta name="author" content="chiaki">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="tsstyle.css" type="text/css">
+
+</head>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+<body>
+<h1>TSパケットフォーマット</h1>
+<h2>TSパケット</h2>
+<section>
+<p>
+ARIB STD-B32
+</p>
+<table class=tspackfig>
+<tr>
+	<th colspan=2 class=packname>
+	TSパケット（188bytes）
+	</th>
+</tr>
+<tr>
+	<td class=packitem_header><a href="#ts-header">ヘッダー</a>（(4+α)bytes）
+	</td>
+	<td class=packitem><a href="tspayload.html" target=payload>ペイロード</a>（(188-(4+α))bytes）
+	</td>
+</tr>
+</table>
+</section>
+
+<h3><a name="ts-header">ヘッダー</a></h3>
+
+<section>
+<div>
+<table class=tspackfig border=1>
+<tr><th colspan=34 class=packname>
+	ヘッダー（(32(fixed)+α)bits）
+	</th>
+</tr>
+<!--
+<tr class=bits><th>bits</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th>
+	<th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th>
+	<th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th>
+	<th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th>
+	<th></th>
+</tr>
+-->
+<tr class=bits><th>bits</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+	<th></th>
+</tr>
+<tr class=bytes><th>bytes</th><th colspan=8>+0</th><th colspan=8>+1</th><th colspan=8>+2</th><th colspan=8>+3</th>
+	<th></th>
+</tr>
+<tr  class=bits><th>bitSize</th>
+	<th colspan=8 class=bits8>8</th>
+		<th class=bits1>1</th>
+			<th class=bits1>1</th>
+				<th class=bits1>1</th>
+					<th colspan=13 class=bits13>13</th>
+						<th colspan=2 class=bits2>2</th>
+							<th colspan=2 class=bits2>2</th>
+								<th colspan=4 class=bits4>4</th>
+									<th class=bits20>α</th>
+
+</tr>
+<tr class=dataname><th></th>
+	<td colspan=8 class=dataname><a href="#syncbyte">同期バイト(047)</a></td>
+	<td class=dataname><a href="#tsperror">トランスポートエラー表示</a></td>
+	<td class=dataname><a href="#strpayload">ペイロードユニット開始表示</a></td>
+	<td class=dataname><a href="#tspprio">トランスポートプライオリティ</a></td>
+	<td colspan=13 class=dataname><a href="#tspid">PID</a></td>
+	<td colspan=2 class=dataname><a href="#tspscranble">トランスポートスクランブル制御</a></td>
+	<td colspan=2 class=dataname><a href="#adptationfiled">アダプテーションフィールド制御</a></td>
+	<td colspan=4 class=dataname><a href="#continuecount">コンティニュティカウンタ</a></td>
+	<td class=dataname><a href="tsadaptationfiled.html" target=adaptfd>アダプテーションフィールド</a></td>
+</tr>
+</table>
+</div>
+<br>
+<div>
+<table border=1>
+<tr><th>名称</th><th>bits</th><th>内容</th>
+</tr>
+<tr><th>同期バイト</th><td class=bits>8</td><td>0x47（固定値）</td>
+</tr>
+<tr><th rowspan=2>トランスポートエラー表示</th><td rowspan=2 class=bits>1</td>
+                                                           <td>0::=エラー無し</td>
+</tr>
+<tr>                                                       <td>1::=少なくとも1ビットの訂正不可能なエラーがTSパケットに存在する</td>
+</tr>
+<tr><th rowspan=2>ペイロードユニット開始表示</th><td rowspan=2 class=bits>1</td>
+                                                       　　　　<td>0::=ペイロード中はPES等の途中データ</td>
+</tr>
+<tr>                                                       <td>1::=ペイロードの開始点がPESパケットの開始点又はポインタである</td>
+</tr>
+<tr><th rowspan=3>トランスポートプライオリティ</th><td rowspan=3 class=bits>1</td>
+                                                       　　　　<td>同一のPIDを持つパケットの中での優先度を示すフラグ</td>
+<tr>                                                   　　　　<td>0::=非優先</td>
+</tr>
+<tr>                                                       <td>1::=優先</td>
+</tr>
+<tr><th>PID</th><td class=bits>13</td><td>ペイロードのデータの種類を識別する（0x0000 - 0x1fff）<br>
+										<table border=1>
+										<tr><th>0000</th><td>PAT</td>
+										</tr>
+										<tr><th>0001</th><td>CAT</td>
+										</tr>
+										<tr><th>0002-000f</th><td>未定義</td>
+										</tr>
+										<tr><th>0010</th><td>NIT</td>
+										</tr>
+										<tr><th>0011-1ffe</th><td>任意</td>
+										</tr>
+										<tr><th>1fff</th><td>NULL</td>
+										</tr>
+										</table>
+										</td>
+</tr>
+<tr><th rowspan=5>トランスポートスクランブル制御</th><td rowspan=5 class=bits>2</td>
+                                                    <td>ぺイロードのスクランブルモードを識別する</td>
+</tr>
+<tr>                                                <td>00::=スクランブル無し</td>
+</tr>
+<tr>                                                <td>01::=未定義</td>
+</tr>
+<tr>                                                <td>10::=偶数鍵</td>
+</tr>
+<tr>                                                <td>11::=奇数鍵</td>
+</tr>
+</tr>
+<tr><th rowspan=5>アダプテーションフィールド制御</th><td rowspan=5 class=bits>2</td>
+                                                    <td>アダプテーションフィールド／ペイロード部の構成を示す</td>
+</tr>
+<tr>　                                               <td>00::=未定義</td>
+</tr>
+<tr>                                                <td>01::=アダプテーションフィールドなし、ペイロードのみ</td>
+</tr>
+<tr>                                                <td>10::=アダプテーションフィールドのみ、ペイロードなし</td>
+</tr>
+<tr>                                                <td>11::=アダプテーションフィールドの次にペイロード</td>
+</tr>
+
+
+<tr><th>コンティニュティカウンタ</th><td class=bits>4</td><td><div>PID毎に0-15の範囲でインクリメント。</div>
+														<div>重複パケット時は同一値。（ただし、同一TS パケットの連送は2 回まで）</div>
+														<div>ペイロード無しパケット時はインクリメントしない。</div>
+													</td>
+</tr>
+<tr><th><a href="tsadaptationfiled.html" target=adaptfd>アダプテーションフィールド</a></th><td class=bits>α</td><td>
+													</td>
+</tr>
+</table>
+</div>
+
+</section>
+
+<h3><a name="ts-header">ペイロード</a></h3>
+<section>
+<div>
+<table border=1>
+<tr><th>ペイロード</th><td class=bits>α</td><td><div>PES:Packetized Elementary Stream</div>
+											<div>PIS:Program Specifiv Information(番組特定情報)</div>
+											<div>SI:Service Information(サービス情報)</div>
+											<div>データなどのセクションデータ</div>
+											</td>
+</tr>
+</table>
+</div>
+</section>
+
+</body>
+</html>

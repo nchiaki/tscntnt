@@ -1,0 +1,76 @@
+@charset "Shift_JIS";
+TABLE.tspackfig {
+			border: 3px solid gray;
+			width: 752px;
+}
+TR.dataname	{
+			font-size: small;
+			text-align: center;
+}
+TH.packname {
+			background-color: skyblue;
+}
+TR.bits {
+			font-size: small;
+}
+TR.bytes {
+			font-size: small;
+			text-align: left
+}
+
+TH.bits1	{
+			border: 1px solid gray;
+			width: 10px;
+}
+TH.bits2	{
+			border: 1px solid gray;
+			width: 20px;
+}
+TH.bits3	{
+			border: 1px solid gray;
+			width: 30px;
+}
+TH.bits4	{
+			border: 1px solid gray;
+			width: 40px;
+}
+TH.bits5	{
+			border: 1px solid gray;
+			width: 50px;
+}
+TH.bits8	{
+			border: 1px solid gray;
+			width: 80px;
+}
+TH.bits10	{
+			border: 1px solid gray;
+			width: 100px;
+}
+TH.bits13	{
+			border: 1px solid gray;
+			width: 130px;
+}
+TH.bits20	{
+			border: 1px solid gray;
+			width: 200px;
+}
+TH.bits42	{
+			border: 1px solid gray;
+			width: 300px;
+}
+
+TD.packitem {
+			border: 1px solid gray;
+}
+
+TD.packitem_header {
+			border: 1px solid gray;
+			width: 250px;
+}
+TD.dataname	{
+			border: 1px solid gray;
+}
+TD.bits	{
+		text-align: center;
+}
+}
