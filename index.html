@@ -21,7 +21,7 @@
 <h2>TSパケット</h2>
 <section>
 <p>
-ARIB STD-B32
+ARIB STD-B32 3/3
 </p>
 <table class=tspackfig>
 <tr>
@@ -79,13 +79,13 @@ ARIB STD-B32
 </tr>
 <tr class=dataname><th></th>
 	<td colspan=8 class=dataname><a href="#syncbyte">同期バイト(047)</a></td>
-	<td class=dataname><a href="#tsperror">トランスポートエラー表示</a></td>
-	<td class=dataname><a href="#strpayload">ペイロードユニット開始表示</a></td>
-	<td class=dataname><a href="#tspprio">トランスポートプライオリティ</a></td>
+	<td class=dataname><a href="#tsperror">トランスポートエラーインジケーター</a></td>
+	<td class=dataname><a href="#strpayload">ペイロードユニット開始インジケーター</a></td>
+	<td class=dataname><a href="#tspprio">トランスポート優先度</a></td>
 	<td colspan=13 class=dataname><a href="#tspid">PID</a></td>
 	<td colspan=2 class=dataname><a href="#tspscranble">トランスポートスクランブル制御</a></td>
 	<td colspan=2 class=dataname><a href="#adptationfiled">アダプテーションフィールド制御</a></td>
-	<td colspan=4 class=dataname><a href="#continuecount">コンティニュティカウンタ</a></td>
+	<td colspan=4 class=dataname><a href="#continuecount">連続性指標</a></td>
 	<td class=dataname><a href="tsadaptationfiled.html" target=adaptfd>アダプテーションフィールド</a></td>
 </tr>
 </table>
@@ -97,17 +97,17 @@ ARIB STD-B32
 </tr>
 <tr><th>同期バイト</th><td class=bits>8</td><td>0x47（固定値）</td>
 </tr>
-<tr><th rowspan=2>トランスポートエラー表示</th><td rowspan=2 class=bits>1</td>
+<tr><th rowspan=2>トランスポートエラーインジケーター</th><td rowspan=2 class=bits>1</td>
                                                            <td>0::=エラー無し</td>
 </tr>
 <tr>                                                       <td>1::=少なくとも1ビットの訂正不可能なエラーがTSパケットに存在する</td>
 </tr>
-<tr><th rowspan=2>ペイロードユニット開始表示</th><td rowspan=2 class=bits>1</td>
-                                                       　　　　<td>0::=ペイロード中はPES等の途中データ</td>
+<tr><th rowspan=2>ペイロードユニット開始インジケーター</th><td rowspan=2 class=bits>1</td>
+                                                       　　　　<td>0::=ペイロードはPES等の途中データ</td>
 </tr>
 <tr>                                                       <td>1::=ペイロードの開始点がPESパケットの開始点又はポインタである</td>
 </tr>
-<tr><th rowspan=3>トランスポートプライオリティ</th><td rowspan=3 class=bits>1</td>
+<tr><th rowspan=3>トランスポート優先度</th><td rowspan=3 class=bits>1</td>
                                                        　　　　<td>同一のPIDを持つパケットの中での優先度を示すフラグ</td>
 <tr>                                                   　　　　<td>0::=非優先</td>
 </tr>
@@ -115,18 +115,29 @@ ARIB STD-B32
 </tr>
 <tr><th>PID</th><td class=bits>13</td><td>ペイロードのデータの種類を識別する（0x0000 - 0x1fff）<br>
 										<table border=1>
-										<tr><th>0000</th><td>PAT</td>
-										</tr>
+										<tr><th>0000</th><td><a href="tspat.html">PAT</a></td>
 										<tr><th>0001</th><td>CAT</td>
-										</tr>
 										<tr><th>0002-000f</th><td>未定義</td>
-										</tr>
-										<tr><th>0010</th><td>NIT</td>
-										</tr>
-										<tr><th>0011-1ffe</th><td>任意</td>
-										</tr>
-										<tr><th>1fff</th><td>NULL</td>
-										</tr>
+										<tr><th>0010</th><td><a href="tsnit.html">NIT</a></td>
+										<tr><th>0011</th><td>SDT/BAT</td>
+										<tr><th>0012</th><td>EIT</td>
+										<tr><th>0013</th><td>RST</td></tr>
+										<tr><th>0014</th><td>TDT/TOT</td></tr></tr>
+										<tr><th>0017</th><td>DCT</td></tr>
+										<tr><th>001E</th><td>DIT</td></tr>
+										<tr><th>001F</th><td>SIT</td></tr>
+										<tr><th>0020, PMT指定</th><td>LIT</td></tr>
+										<tr><th>0021, PMT指定</th><td>ERT</td></tr>
+										<tr><th>0022</th><td>PCAT</td></tr>
+										<tr><th>0023</th><td>SDTT</td></tr>
+										<tr><th>0024</th><td>BIT</td></tr>
+										<tr><th>0025</th><td>NBIT/LDT</td></tr>
+										<tr><th>PAT指定</th><td><a href=tspmt.html>PMT</a></td></tr>
+										<tr><th>CAT指定</th><td>EMM</td></tr>
+										<tr><th>PMT指定</th><td>ECM</td></tr>
+										<tr><th>PMT指定</th><td>DSM-CC Section</td></tr>
+										<tr><th>DCT指定</th><td>DLT</td></tr>
+										<tr><th>1fff</th><td>ヌルパケット</td>
 										</table>
 										</td>
 </tr>
@@ -155,12 +166,13 @@ ARIB STD-B32
 </tr>
 
 
-<tr><th>コンティニュティカウンタ</th><td class=bits>4</td><td><div>PID毎に0-15の範囲でインクリメント。</div>
+<tr><th>連続性指標</th><td class=bits>4</td><td><div>PID毎に0-15の範囲でインクリメント。</div>
 														<div>重複パケット時は同一値。（ただし、同一TS パケットの連送は2 回まで）</div>
 														<div>ペイロード無しパケット時はインクリメントしない。</div>
 													</td>
 </tr>
 <tr><th><a href="tsadaptationfiled.html" target=adaptfd>アダプテーションフィールド</a></th><td class=bits>α</td><td>
+													ITU-T 勧告 H.222.0 に従う。
 													</td>
 </tr>
 </table>

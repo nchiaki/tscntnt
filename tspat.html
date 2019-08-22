@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TSパケット:PAT
+</title>
+<!-- content属性にページの紹介文を記述 -->
+<meta name="description" content="TSペイロード:PAT">
+<!-- content属性にページの著者情報を記述 -->
+<meta name="author" content="chiaki">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="tsstyle.css" type="text/css">
+
+</head>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+<body>
+<h1><a href="index.html">TSパケット</a>:PAT</h1>
+<hr>
+<h2>PAT</h2>
+  <section>
+
+  <div>
+  <table border=1>
+  <tr><th colspan=6 class=packname>
+  	PATセクション(64+(16+3+13)n+32)
+  	</th>
+  </tr>
+  <tr  class=bytes><th>bytes</th>
+  	<th colspan= >+0</th>
+  	<th colspan= >+(8+(4*(N-1)))</th>
+  	<th colspan=2 >+(10+(4*(N-1)))</th>
+  	<th colspan= >+(8+(4*N))</th>
+  </tr>
+  <tr  class=bits><th>bits</th>
+  	<th colspan= class=bits8>64</th><!-- 拡張形式ヘッダー -->
+  	<th colspan= class=bits8>16</th><!-- 放送番組識別子 -->
+  	<th colspan= class=bits8>3</th><!-- 予約ビット -->
+  	<th colspan= class=bits8>13</th><!-- NW PID/PMT PID -->
+  	<th colspan= class=bits8>32</th><!-- 32 -->
+  </tr>
+  <tr class=dataname><th></th>
+  	<td colspan= class=dataname>拡張形式セクションヘッダー</td>
+  	<td colspan= class=dataname>放送番組番号識別子</td>
+  	<td colspan= class=dataname>予約<br>(0x7)</td>
+  	<td colspan= class=dataname>NW PID/PMT PID</td>
+  	<td colspan= class=dataname>CRC</td>
+  </tr>
+  <tr><th colspan=2></th>
+  	<th colspan=3>xN</th>
+  	<th></th>
+  </tr>
+  </table>
+  <p>
+  「<a href="tspayload.html#extfmtsct">拡張形式セクションヘッダー</a>」における
+  <ul>
+    <li>「テーブル識別子」は 0x00
+    <li>「予約1」の値は 0x3 とする（「セクションシンタックス指示」の次のビットは'0'）
+    <li>「テーブル識別子拡張」はトランスポートストリーム識別子用
+  </ul>
+  「放送番組番号識別子」
+  <ul>
+    <li> == 0 はNIT用、「NW PID/PMT PID」は NIT PID となる（固定値 0x0010）
+    <li> != 0 の「NW PID/PMT PID」は <a href="tspmt.html">PMT</a> PID となる
+  </ul>
+  </p>
+  </div>
+
+  </section>
+</body>

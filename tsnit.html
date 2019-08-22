@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TSパケット:NIT
+</title>
+<!-- content属性にページの紹介文を記述 -->
+<meta name="description" content="TSペイロード:NIT">
+<!-- content属性にページの著者情報を記述 -->
+<meta name="author" content="chiaki">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="tsstyle.css" type="text/css">
+
+</head>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+<body>
+<h1><a href="index.html">TSパケット</a>:NIT</h1>
+
+<hr>
+
+<h2>NIT</h2>
+<section>
+<div>
+<table border=1>
+<tr><th colspan=15 class=packname>
+	NITセクション
+	</th>
+</tr>
+<tr  class=bytes><th>bytes</th>
+	<th colspan= >+0</th>										<!-- 拡張ヘッダ -->
+	<th colspan=2 >+8</th>									<!-- 予ｓ約4, ネットワーク記述子長 -->
+	<th colspan= >+10</th>									<!-- 記述子1 -->
+	<th colspan=2 >+(10+L1)</th>						<!-- 予約4, トランスポートストリームループ長 -->
+
+	<th colspan= >+(10+L1)+2</th>					<!--  トランスポート識別子 -->
+	<th colspan= >+(10+L1)+4</th>					<!-- オリジナルネットワーク識別子 -->
+	<th colspan=2 >+(10+L1)+6</th>					<!-- 予約4, トランスポートストリーム記述子長 -->
+	<th colspan= >+(10+L1)+8</th>						<!-- 記述子2 -->
+
+	<th colspan= >+(10+L1)+((8+L2)*N)</th>	<!-- CRC -->
+</tr>
+<tr  class=bits><th>bits</th>
+	<th colspan= class=bits8>64</th>
+	<th colspan= class=bits8>4</th>
+	<th colspan= class=bits8>12</th>
+	<th colspan= class=bits8>8*L1</th>
+	<th colspan= class=bits8>4</th>
+	<th colspan= class=bits8>12</th>
+
+	<th colspan= class=bits8>16</th>
+	<th colspan= class=bits8>16</th>
+	<th colspan= class=bits8>4</th>
+	<th colspan= class=bits8>12</th>
+	<th colspan= class=bits8>8*L2</th>
+	<th colspan= class=bits8>32</th>
+</tr>
+<tr class=dataname><th></th>
+	<td colspan= class=dataname>拡張形式セクションヘッダー</td>
+	<td colspan= class=dataname>0xf</td>
+	<td colspan= class=dataname>ネットワーク記述子長(L1)</td>
+	<td colspan= class=dataname>記述子1</td>
+	<td colspan= class=dataname>0xf</td>
+	<td colspan= class=dataname>トランスポートストリームループ長</td>
+
+	<td colspan= class=dataname>トランスポート識別子</td>
+	<td colspan= class=dataname>オリジナルネットワーク識別子</td>
+	<td colspan= class=dataname>0xf</td>
+	<td colspan= class=dataname>トランスポートストリーム記述子長(L2)</td>
+	<td colspan= class=dataname>記述子2</td>
+
+	<td colspan= class=dataname>CRC</td>
+</tr>
+<tr><th colspan=></th>
+	  <th colspan=6></th>
+	  <td align=center colspan=5>xN(トランスポートストリームループ長/(6+L2))</td>
+		<th></th>
+	</tr>
+</table>
+<p>
+  <table>
+  <tr><th valign=top align=right>「<a href="tspayload.html#extfmtsct">拡張形式セクションヘッダー</a>」における</th><td>
+                                                  <ul>
+                                                  <li>「テーブル識別子」は
+																										<ul>
+																											<li>0x40 : 自ネットワークNIT
+																											<li>0x41 : 他ネットワークNIT
+																										</ul>
+                                                  <li>「予約1」の値は 0x7 とする
+                                                  <li>「テーブル識別子拡張」はネットワーク識別子伝送用
+                                                  </ul></td>
+  <tr><th align=right>ネットワーク記述子長</th><td>10bits範囲内での「記述子１」バイト長（bit11/10は'0'）</td>
+  <tr><th align=right>記述子１</th><td>当該ネットワークに関する記述子</td>
+	<tr><th align=right>トランスポートストリーム長</th><td>10bits範囲内でのこの次のデータからCRC手前までのバイト長（bit11/10は'0'）</td>
+	<tr><th align=right>トランスポートストリーム識別子</th><td>トランスポートストリームの識別番号</td>
+	<tr><th align=right>オリジナルネットワーク識別子</th><td>当該トランスポートストリームの元のネットワークの識別番号</td>
+	<tr><th align=right>トランスポートストリーム長</th><td>10bits範囲内での「記述子２」バイト長（bit11/10は'0'）</td>
+	<tr><th align=right>記述子２</th><td>当該ネットワークに関する記述子</td>
+</table>
+</p>
+</div>
+</section>
+
+</body>

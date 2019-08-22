@@ -41,6 +41,7 @@ TH.bits5	{
 TH.bits8	{
 			border: 1px solid gray;
 			width: 80px;
+			font-size: small;
 }
 TH.bits10	{
 			border: 1px solid gray;

@@ -47,13 +47,13 @@
 		<th class=bits1>1</th>
 			<th class=bits1>1</th>
 				<th class=bits1>1</th>
-				
+
 					<th class=bits1>1</th>
 					<th class=bits1>1</th>
 					<th class=bits1>1</th>
 					<th class=bits1>1</th>
 					<th class=bits1>1</th>
-				
+
 						<th class=bits10>α</th>
 							<th class=bits20>β</th>
 </tr>
@@ -62,13 +62,13 @@
 	<td class=dataname><a href="#discon">ディスコンティニュティ表示</a></td>
 	<td class=dataname><a href="#random">ランダムアクセス表示</a></td>
 	<td class=dataname><a href="#esprio">ESプライオリティ表示</a></td>
-	
+
 	<td class=dataname><a href="#pcrflg">P C R フラグ</a></td>
 	<td class=dataname><a href="#opcrflg">O P C R フラグ</a></td>
 	<td class=dataname><a href="#splicingpointflg">スプライスポイントフラグ</a></td>
 	<td class=dataname><a href="#transportprivatedataflg">トランスポートプライベートデータフラグ</a></td>
 	<td class=dataname><a href="#adaptfiledextflg">アダプテーションフィールド拡張フラグ</a></td>
-	
+
 	<td class=dataname><a href="tsoptionfild0.html" target=optfd>オプションフィールド</a></td>
 	<td class=dataname><a href="#staffing">スタッフィングバイト</a></td>
 </tr>
@@ -84,6 +84,12 @@
 <tr><th>アダプテーションフィールド長</th><td class=bits>8</td><td>
 												<div>「ディスコンティニュティ表示」からのサイズ。</div>
 												<div>(=0)の時のアダプテーションフィールドには、「アダプテーションフィールド長」のみが存在する。</div>
+												<div><table>
+													<tr><th>アダプテーションフィールド制御</th><th>許容値</th>
+													<tr><td>0x11:</td><td>0～182</td>
+													<tr><td>0x10:</td><td>183</td>
+												</table></div>
+												<div>PESパケットデータのペイロードバウンダリ確保はアダプテーションフィールドを利用する。</div>
 												</td>
 <tr><th rowspan=3>ディスコンティニュティ表示</th><td rowspan=3 class=bits>1</td><td>
 																<div>パケットの不連続を示す。</div>
