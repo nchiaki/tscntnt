@@ -1,4 +1,4 @@
-@charset "Shift_JIS";
+@charset "UTF-8";
 TABLE.tspackfig {
 			border: 3px solid gray;
 			width: 752px;
@@ -74,4 +74,15 @@ TD.dataname	{
 TD.bits	{
 		text-align: center;
 }
+
+.bdybck {
+	background-color : white;
+}
+DIV.signa {
+	color : white;
+	text-align: right;
+}
+
+.sosmall {
+	font-size: xx-small;
 }

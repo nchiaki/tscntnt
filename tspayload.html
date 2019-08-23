@@ -162,12 +162,15 @@ M : ペイロードバイトサイズ
 M : ペイロードバイトサイズ
 </p>
 <table>
-<tr><th valign=top rowspan=12>テーブル識別子</th><td>=</td><td>0x00</td><td><a href="tspat.html">PAT</a></td></tr>
+<tr><th valign=top rowspan=15>テーブル識別子</th><td>=</td><td>0x00</td><td><a href="tspat.html">PAT</a></td></tr>
 <tr>                                           <td>=</td><td>0x01</td><td>CAT</td></tr>
 <tr>                                           <td>=</td><td>0x02</td><td><a href="tspmt.html">PMT</a></td></tr>
-<tr>                                           <td>=</td><td>0x3a</td><td>DSM-CC Section</td></tr>
-<tr>                                           <td></td><td>//</td><td></td></tr>
-<tr>                                           <td>=</td><td>0x3f</td><td>DSM-CC Section</td></tr>
+<tr>                                           <td>=</td><td>0x3a</td><td><a href=tsdsmccsct.html>DSM-CC Section<a> 予約済み（by ISO/IEC13818-6)</td></tr>
+<tr>                                           <td>=</td><td>0x3b</td><td><a href=tsdsmccsct.html>DSM-CC Section<a> <a href=dsmccdii.html>DII</a></td></tr>
+<tr>                                           <td>=</td><td>0x3c</td><td><a href=tsdsmccsct.html>DSM-CC Section<a> <a href="">DDB</a></td></tr>
+<tr>                                           <td>=</td><td>0x3d</td><td><a href=tsdsmccsct.html>DSM-CC Section<a> <a href="">ストリーム記述子</a></td></tr>
+<tr>                                           <td>=</td><td>0x3e</td><td><a href=tsdsmccsct.html>DSM-CC Section<a> <a href="">プライベートデータ</a></td></tr>
+<tr>                                           <td>=</td><td>0x3f</td><td><a href=tsdsmccsct.html>DSM-CC Section<a> 予約済み（by ISO/IEC13818-6)</td></tr>
 <tr>                                           <td>=</td><td>0x40</td><td><a href="tsnit.html">NIT(BSdgt:自ネットワーク, 地dgt)</a></td>
 <tr>                                           <td>=</td><td>0x41</td><td><a href="tsnit.html">NIT(BSdgt:他ネットワーク)</a></td></tr>
 <tr>                                           <td>=</td><td>0x42</td><td>SDT(BSdgt:自ネットワーク, 地dgt)</td></tr>

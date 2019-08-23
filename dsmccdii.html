@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TSパケット:DSM-CC:DII
+</title>
+<!-- content属性にページの紹介文を記述 -->
+<meta name="description" content="TSペイロード:DSM-CC:DII">
+<!-- content属性にページの著者情報を記述 -->
+<meta name="author" content="chiaki">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="tsstyle.css" type="text/css">
+
+</head>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+<body class=bdybck>
+<h1><a href="index.html">TSパケット</a>:DSM-CC:DII</h1>
+
+<div>STD-B24 3/3<div>
+<hr>
+<h2>DII</h2>
+<section>
+<div>
+<table border=1>
+<tr><th colspan=6 class=packname>DownloadInfoIndication()</th></tr>
+<tr class=bits><th colspan=3></th><th>bits</th><th>bytes</th><td></td></tr>
+<tr><th rowspan=9>dsmccMessageHeader()</th><th colspan=2>protocolDiscriminator</th><th>8</th><th>1</th><td>0x11</td></tr>
+<tr>																			<th colspan=2>dsmccType</th>					<th>8</th><th>1</th><td>0x03</td></tr>
+<tr>																			<th colspan=2>messageId</th>					<th>16</th><th>2</th><td>0x1002</td></tr>
+<tr>																<th colspan=2><a name=trnsctnid>transaction_id</a></th><th>32</th><th>4</th><td>メッセージ識別とバージョン機能を持つ識別子(by ISO/IEC 13818-6)<br>
+																																								bit31-30 : Transaction Id Originator<br>
+																																								bit29-0 : Transaction Number<br>
+																																								Transaction Id Originator : 10B<br>
+																																								Transaction Number : DIIのバージョンの識別に用いる
+																																								</td></tr>
+<tr>																			<th colspan=2>reserved</th>						<th>8</th><th>1</th><td>---</td></tr>
+<tr>															<th colspan=2>adaptationLength</th>						<th>8</th><th>1</th><td>以降の dsmccAdaptationHeader()領域 のバイトサイズ</td></tr>
+<tr>															　<th colspan=2>messageLength</th>						<th>16</th><th>2</th><td>このフィールド直後からのメッセージのバイトサイズ</td></tr>
+<tr>											<th rowspan=2>dsmccAdaptationHeader()</th><th>adaptationType</th><th>8</th><th>1</th><td>アダプテーションの型を示す<br>
+																																																							0x00 - 0x7f : 予約済み（by ISO/IEC13818-6）<br>
+																																																							0x80 - 0xff : ユーザ定義
+																																																							</td></tr>
+<tr>															　																<th>adaptationDataByte</th><th>8*<span class=sosmall>(adaptationLength-1)</span></th><th><span class=sosmall>(adaptationLength-1)</span></th><td></td></tr>
+<tr><th colspan=3>                   downloadId</th><th>32</th><th>4</th><td>data_event_id を含むカルーセル識別ラベル<br>
+																																				bit31-28の4bitsを data_event_id とする<br>
+																																				data_event_id : 同一サービスの時間的に隣り合うデータイベントの区別と<br>
+																																				当該データイベントのデータカルーセル／イベントメッセージで伝送されるローカルコンテンツの誤受信回避用
+																																				</td></tr>
+<tr><th colspan=3>                    blockSize</th><th>16</th><th>2</th><td>DDBメッセージ伝送データ（モジュール末尾以外）の各ブロックのバイト長</td></tr>
+<tr><th colspan=3>                    windowSize</th><th>8</th><th>1</th><td>0(未使用)</td></tr>
+<tr><th colspan=3>                     ackPeriod</th><th>8</th><th>1</th><td>0(未使用)</td></tr>
+<tr><th colspan=3>              tCDownloadWindow</th><th>32</th><th>4</th><td>0(未使用)</td></tr>
+<tr><th colspan=3>            tCDownloadScenario</th><th>32</th><th>4</th><td>ダウンロード開始から終了までのタイムアウト時間（&micro;秒）</td></tr>
+<tr><th rowspan=1>compatibilityDescriptor()</th><th colspan=2>descriptorCount</th><th>32</th><th>4</th><td>本データ不要時は 0 </td></tr>
+<tr><th colspan=3>               numberOfModules</th><th>16</th><th>2</th><td>以降に続く（privateDataLength手前迄）モジュールの件数</td></tr>
+<tr><th rowspan=5>numberOfModules X </th><th colspan=2><a name=mdlId>moduleId</a></th><th>16</th><th>2</th><td>モジュール識別</td></tr>
+<tr>																		<th colspan=2>moduleSize</th><th>32</th><th>4</th><td>モジュールのバイト長（不定時は 0 ）</td></tr>
+<tr>																		<th colspan=2>moduleVersion</th><th>8</th><th>1</th><td>モジュールのバージョン</td></tr>
+<tr>																		<th colspan=2>moduleInfoLength</th><th>8</th><th>1</th><td>次に続くモジュール情報領域のバイト長</td></tr>
+<tr>																		<th colspan=2>moduleInfoByte</th><th>8 * <span class=sosmall>moduleInfoLength</span></th><th><span class=sosmall>moduleInfoLength</span></th><td><a href=modlprvtdscrpt.html>モジュール情報領域</a></td></tr>
+<tr><th colspan=3>             privateDataLength</th><th>16</th><th>2</th><td>以降に続くプライベート領域のバイトサイズ</td></tr>
+<tr><th colspan=3>             privateDataByte</th><th>8 * <span class=sosmall>privateDataLength</span></th><th><span class=sosmall>privateDataLength</span></th><td><a href=modlprvtdscrpt.html>プライベート領域</a></td></tr>
+</table>
+</div>
+</section>
+<hr>
+<div>STD-B24 3/3<div>
+<div class=signa>By chiaki</div>
+</body>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TSパケット:DSM-CC
+</title>
+<!-- content属性にページの紹介文を記述 -->
+<meta name="description" content="TSペイロード:DSM-CC">
+<!-- content属性にページの著者情報を記述 -->
+<meta name="author" content="chiaki">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="tsstyle.css" type="text/css">
+
+</head>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+<body class=bdybck>
+<h1><a href="index.html">TSパケット</a>:DSM-CC</h1>
+
+<div>STD-B24 3/3<div>
+<hr>
+<h2>DSM-CC</h2>
+<section>
+<div>
+<table border=1>
+<tr><th colspan=15 class=packname>
+	DSM-CCセクション
+	</th>
+</tr>
+<tr  class=bytes><th>bytes</th>
+	<th colspan= >+0</th>										<!-- 拡張ヘッダ -->
+	<th colspan= >+8</th>									<!-- DownloadInfoIndication() / DownloadDataBlock() -->
+
+	<th colspan= >+(8+(Z/8))</th>	<!-- CRC -->
+</tr>
+<tr  class=bits><th>bits</th>
+	<th colspan= class=bits8>64</th>
+	<th colspan= class=bits8>Z</th>
+	<th colspan= class=bits8>32</th>
+</tr>
+<tr class=dataname><th></th>
+	<td colspan= class=dataname>拡張形式セクションヘッダー</td>
+	<td colspan= class=dataname><a href=dsmccdii.html>DII: DownloadInfoIndication()</a><br>
+															<a href="">DDB: DownloadDataBlock()</a>
+															</td>
+	<td colspan= class=dataname>CRC</td>
+</tr>
+</table>
+<p>
+  「<a href="tspayload.html#extfmtsct">拡張形式セクションヘッダー</a>」における
+    <ul>
+    <li>「テーブル識別子」は 0x3b(<a href=dsmccdii.html>DII</a>), 0x3c(<a href="">DDB</a>), 0x3e(プライベートデータ)
+		<li>「セクションシンタックス指示」は 1 (セクション終端はCRC32)
+    <li>「予約1」の値は 0x3 とする
+		<li>「テーブル識別子拡張」
+			<ul>
+				<li><a href=dsmccdii.html>DII</a> : <a href=dsmccdii.html#trnsctnid>トランザクション識別</a>の下位２バイトの値を設定
+				<li><a href="">DDB</a> : モジュール識別を設定
+			</ul>
+		<li>「バージョン番号」
+			<ul>
+				<li><a href=dsmccdii.html>DII</a> : 0（バージョン管理はトランザクション識別で実施）
+				<li><a href="">DDB</a> : モジュールバージョンの下位5ビットを設定
+			</ul>
+		<li>「カレントネキスト指示」：常に 1
+		<li>「セクション番号」
+			<ul>
+				<li><a href=dsmccdii.html>DII</a> : 常時 0
+				<li><a href="">DDB</a> : ブロック番号の下位 8 bits
+			</ul>
+    </ul>
+
+		<a href="tspayload.html#extfmtsct">拡張形式セクションヘッダー</a>直後の 4bytes(protocolDiscriminator(1)/dsmccType(1)/msssageID(2))が
+		<ul>
+		<li>0x11 03 1002: <a href=dsmccdii.html>DII DownloadInfoIndication()</a>
+		<li>0x11 03 1003: <a href="">DDB	DownloadDataBlock()</a>
+		</ul>
+</p>
+</div>
+</section>
+<hr>
+<div>STD-B24 3/3<div>
+<div class=signa>By chiaki</div>
+</body>

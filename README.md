@@ -5,5 +5,6 @@
     ・表記をARIBに揃える：index.html
     ・文字コードを utf-8, 行終端を LFに揃える
     ・PAT, PMT, NITコンテンツ
+    ・DSM-CC DII コンテンツ
     </td></tr>
 </table>

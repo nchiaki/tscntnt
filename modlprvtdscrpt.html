@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TSパケット:DSM-CC:DII:モジュール情報領域・プライベート領域記述子
+</title>
+<!-- content属性にページの紹介文を記述 -->
+<meta name="description" content="TSペイロード:DSM-CC:DII:モジュール情報領域・プライベート領域記述子">
+<!-- content属性にページの著者情報を記述 -->
+<meta name="author" content="chiaki">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="tsstyle.css" type="text/css">
+
+</head>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+<body class=bdybck>
+<h1><a href="index.html">TSパケット</a>:DSM-CC:DII:モジュール情報領域・プライベート領域記述子</h1>
+
+<div>STD-B24 3/3<div>
+<hr>
+<h2>DII:モジュール情報領域・プライベート領域記述子</h2>
+<section>
+<div>
+
+<h3>基本形</h3>
+
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th><th>8</th><th>1</th><td>記述子の機能を振り分けるタグ値 0x01 - 0xff</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
+	<tr><th>descriptor_data</th><th>8*<span class=sosmall>descriptor_length</span></th><th><span class=sosmall>descriptor_length</span></th><td>記述子データ</td></tr>
+</table>
+
+<h3>機能別</h3>
+
+<table border=1>
+<tr><th class=packname>タグ値</th><th class=packname>記述子名</th><th class=packname>機能</th></tr>
+<tr><th><a href=#typdsc name=tag01> 	0x01</a></th><th>Ttpe 記述子</th><td>モジュールの型（MIME形式等）</td></tr>
+<tr><th><a href=#nmdsc name=tag02> 		0x02</a></th><th>Name 記述子</th><td>モジュール名（ファイル名）</td></tr>
+<tr><th><a href=#infdsc name=tag03> 	0x03</a></th><th>Info 記述子</th><td>モジュール情報（文字型）</td></tr>
+<tr><th><a href=#mdllnkdsc name=tag04>0x04</a></th><th>Module link 記述子</th><td>モジュール最大伝送サイズ（256Mbytes）を超えているモジュールの分割送出時のリンク情報（<a href=dsmccdii.html#mdlId>moduleId</a>）</td></tr>
+<tr><th><a href=#crcdsc name=tag05>	 	0x05</a></th><th>CRC32 記述子</th><td>伝送モジュール全体の CRC32</td></tr>
+<tr><th><a href=#dwldtmdsc name=tag07>	 	0x07</a></th><th>ダウンロード推定時間 記述子</th><td>ダウンロード推定所要時間（秒）</td></tr>
+<tr><th><a>0x08-0x70</a></th><th colspan=2>予約</th></tr>
+<tr><th><a href=#cchprio name=tag71>	 	0x71</a></th><th>キャシュ優先度 記述子</th><td>GEM1.2 B.2.1.1で要求されるモジュールのキャッシュの振る舞いに関する情報</td></tr>
+<tr><th><a>0x72-0x7f</a></th><th colspan=2>予約</th></tr>
+<tr><th><a>0x8f-0xbf</a></th><th colspan=2>事業者定義の記述子</th></tr>
+<tr><th><a href=#exprdsc name=tagc0>	 	0xc0</a></th><th>Expire 記述子</th><td>モジュールの有効期限に関する情報</td></tr>
+<tr><th><a href=#actvtmdsc name=tagc1>	 	0xc1</a></th><th>ActivationTime 記述子</th><td>モジュールの有効化時間に関する情報。<br>
+																																												本記述子が存在しない時は、即有効とする。
+																																												</td></tr>
+</table>
+
+<br>
+
+<h4><a name=typdsc>Ttpe 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th><th>8</th><th>1</th><td>0x01</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
+	<tr><th>text_char</th><th>8*<span class=sosmall>descriptor_length</span></th><th><span class=sosmall>descriptor_length</span></th><td>
+																																					RFC1521, RFC1590 準拠のメディア型<br>
+																																					以下参照
+																																					<ul>
+																																						<li>XMLベースのマルチメディア符号化：第二編付録規定C
+																																						<li>限定受信方式：ARIB STD-B25 第2部
+																																						<li>サーバー型放送形式：ARIB STD-B38
+																																					</ul>
+																																					</td></tr>
+</table>
+<a href=#tag01>戻る</a>
+
+<h4><a name=nmdsc>Name 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th><th>8</th><th>1</th><td>0x02</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
+	<tr><th>text_char</th><th>8*<span class=sosmall>descriptor_length</span></th><th><span class=sosmall>descriptor_length</span></th><td>
+																																					モジュールとして伝送するファイルのファイル名<br>
+																																					ModuleLink記述子が存在する場合は、ModuleLink記述子 position 0x00 のモジュールにのみ本記述子を記述する。
+																																					</td></tr>
+</table>
+<a href=#tag02>戻る</a>
+
+<h4><a name=infdsc>Info 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th><th>8</th><th>1</th><td>0x03</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
+	<tr><th>ISO_639_language_code</th><th>24</th><th>3</th><td>ISO639-2 3文字 言語コード</td></tr>
+	<tr><th>text_char</th><th>8*<span class=sosmall>(descriptor_length-3)</span></th><th><span class=sosmall>(descriptor_length-3)</span></th><td>
+																																					モジュールとして伝送するファイルに関する文字列情報
+																																					</td></tr>
+</table>
+<a href=#tag03>戻る</a>
+
+<h4><a name=mdllnkdsc>Module link 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th><th>8</th><th>1</th><td>0x04</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>3
+																							</td></tr>
+	<tr><th>position</th><th>8</th><th>1</th><td>分割送出されているモジュールの位置関係<br>
+																							0 : 先頭<br>
+																							1 : 中間<br>
+																							2 : 最後</td></tr>
+	<tr><th>moduleId</th><th>16</span></th><th>2</th><td>
+																							リンク先のモジュールのモジュール識別<br>
+																							position : 2 の時は無視される。
+																							</td></tr>
+</table>
+<a href=#tag04>戻る</a>
+
+<h4><a name=crcdsc>CRC32 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th><th>8</th><th>1</th><td>0x05</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>4</td></tr>
+	<tr><th>CRC_32</th><th>32</th><th>4</th><td>
+																					モジュール全体を通して計算されたCRC<br>
+																					CRC計算定義：ARIB STD B-10 第2部付録B
+																					</td></tr>
+</table>
+<a href=#tag05>戻る</a>
+
+<h4><a name=dwldtmdsc>ダウンロード推定時間 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th><th>8</th><th>1</th><td>0x07</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>4</td></tr>
+	<tr><th>est_download_time</th><th>32</th><th>4</th><td>
+																					モジュールダウンロード推定時間（秒）
+																					</td></tr>
+</table>
+<a href=#tag07>戻る</a>
+
+<h4><a name=cchprio>キャシュ優先度 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th><th>8</th><th>1</th><td>0x71</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>2</td></tr>
+	<tr><th>priority_value</th><th>8</th><th>1</th><td>
+																					キャッシュの優先度を示す値。<br>
+																					高い値ほどキャッシュの重要性が高い。
+																					</td></tr>
+	<tr><th>transparency_level</th><th>8</th><th>1</th><td>
+																					オブジェクトをキャッシュする端末において使用される透過レベル
+																					<ul>
+																						<li>0 : reserved
+																						<li>1 : Transparent caching
+																						<li>2 : Semi-transparent caching
+																						<li>3 : Static caching
+																						<li>4...255: reserved
+																					</ul>
+																					</td></tr>
+</table>
+<a href=#tag71>戻る</a>
+
+<h4><a name=exprdsc>Expire 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=2></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th colspan=2>descriptor_tag</th><th>8</th><th>1</th><td>0xc0</td></tr>
+	<tr><th colspan=2>descriptor_length</th><th>8</th><th>1</th><td>6</td></tr>
+	<tr><th colspan=2>time_mode</th><th>8</th><th>1</th><td>有効期限の時刻指定方法を示す<br>
+																						<ul>
+																							<li>1 : MJD_JST_time (修正ユリウス暦と日本標準時であらわされる絶対時刻)
+																							<li>4 : passed_seconds（ダウンロード後の経過時間（秒））
+																							<li>その他： 予約
+																						</ul>
+																						</td></tr>
+	<tr><th>time_mode == 1</th><th>MJD_JST_time</th><th>40</th><th>5</th><td>
+																					MJDの下位16ビットを16ビットで符号化し、続く24ビットを６つのBCDで符号化する。<br>
+																					ARIB STD-B10 第２部付録C参照
+																					</td></tr>
+	<tr><th rowspan=2>time_mode == 4</th><th>reserved</th><th>8</th><th>1</th><td>
+																					</td></tr>
+	<tr>                                 <th>passed_seconds</th><th>32</th><th>4</th><td>
+																					有効時間を秒で表す。
+																					</td></tr>
+</table>
+<a href=#tagc0>戻る</a>
+
+<h4><a name=actvtmdsc>ActivationTime 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=2></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th colspan=2>descriptor_tag</th><th>8</th><th>1</th><td>0xc1</td></tr>
+	<tr><th colspan=2>descriptor_length</th><th>8</th><th>1</th><td>6</td></tr>
+	<tr><th colspan=2>time_mode</th><th>8</th><th>1</th><td>有効期限の時刻指定方法を示す<br>
+																						<ul>
+																							<li>1 : MJD_JST_time (修正ユリウス暦と日本標準時であらわされる絶対時刻, 記録済みストリーム再生時は再生時の時刻を参照)
+																							<li>2 : NPT_time（DSM-CC ストリーム記述子 Normal Play Time による有効化時刻を参照）
+																							<li>3 : eventRelativeTime（番組開始時刻からの相対時間（ミリ秒））
+																							<li>5 : MJD_JST_time (修正ユリウス暦と日本標準時であらわされる絶対時刻, 記録済みストリーム再生時は放送時の時刻を参照)
+																							<li>その他： 予約
+																						</ul>
+																						</td></tr>
+	<tr><th>time_mode == 1 or 5</th><th>MJD_JST_time</th><th>40</th><th>5</th><td>
+																					MJDの下位16ビットを16ビットで符号化し、続く24ビットを６つのBCDで符号化する。<br>
+																					ARIB STD-B10 第２部付録C参照
+																					</td></tr>
+	<tr><th rowspan=2>time_mode == 2</th><th>reserved</th><th>7</th><th>0.875</th><td>
+																					</td></tr>
+	<tr>                                 <th>eventRelativeTime</th><th>33</th><th>4.125</th><td>
+																					NPT_time
+																					</td></tr>
+	<tr><th rowspan=2>time_mode == 3</th><th>reserved</th><th>4</th><th>0.5</th><td>
+																					</td></tr>
+	<tr>                                 <th>eventRelativeTime</th><th>36</th><th>4.5</th><td>
+																					番組開始時刻からの相対時間（ミリ秒）
+																					</td></tr>
+</table>
+<a href=#tagc1>戻る</a>
+
+
+
+</div>
+</section>
+
+<hr>
+
+<div>STD-B24 3/3<div>
+<div class=signa>By chiaki</div>
+</body>
