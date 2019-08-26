@@ -17,11 +17,11 @@
 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 
 <body class=bdybck>
-<h1><a href="index.html">TSパケット</a>:DSM-CC:DII:モジュール情報領域・プライベート領域記述子</h1>
+<h1><a href="index.html">TSパケット</a>:<a href=tsdsmccsct.html>DSM-CC</a>:<a href=dsmccdii.html>DII</a>:モジュール情報領域・プライベート領域記述子</h1>
 
 <div>STD-B24 3/3<div>
 <hr>
-<h2>DII:モジュール情報領域・プライベート領域記述子</h2>
+<h2><a href=dsmccdii.html>DII</a>:モジュール情報領域・プライベート領域記述子</h2>
 <section>
 <div>
 
@@ -37,26 +37,57 @@
 <h3>機能別</h3>
 
 <table border=1>
-<tr><th class=packname>タグ値</th><th class=packname>記述子名</th><th class=packname>機能</th></tr>
-<tr><th><a href=#typdsc name=tag01> 	0x01</a></th><th>Ttpe 記述子</th><td>モジュールの型（MIME形式等）</td></tr>
-<tr><th><a href=#nmdsc name=tag02> 		0x02</a></th><th>Name 記述子</th><td>モジュール名（ファイル名）</td></tr>
-<tr><th><a href=#infdsc name=tag03> 	0x03</a></th><th>Info 記述子</th><td>モジュール情報（文字型）</td></tr>
-<tr><th><a href=#mdllnkdsc name=tag04>0x04</a></th><th>Module link 記述子</th><td>モジュール最大伝送サイズ（256Mbytes）を超えているモジュールの分割送出時のリンク情報（<a href=dsmccdii.html#mdlId>moduleId</a>）</td></tr>
-<tr><th><a href=#crcdsc name=tag05>	 	0x05</a></th><th>CRC32 記述子</th><td>伝送モジュール全体の CRC32</td></tr>
-<tr><th><a href=#dwldtmdsc name=tag07>	 	0x07</a></th><th>ダウンロード推定時間 記述子</th><td>ダウンロード推定所要時間（秒）</td></tr>
-<tr><th><a>0x08-0x70</a></th><th colspan=2>予約</th></tr>
-<tr><th><a href=#cchprio name=tag71>	 	0x71</a></th><th>キャシュ優先度 記述子</th><td>GEM1.2 B.2.1.1で要求されるモジュールのキャッシュの振る舞いに関する情報</td></tr>
-<tr><th><a>0x72-0x7f</a></th><th colspan=2>予約</th></tr>
-<tr><th><a>0x8f-0xbf</a></th><th colspan=2>事業者定義の記述子</th></tr>
-<tr><th><a href=#exprdsc name=tagc0>	 	0xc0</a></th><th>Expire 記述子</th><td>モジュールの有効期限に関する情報</td></tr>
-<tr><th><a href=#actvtmdsc name=tagc1>	 	0xc1</a></th><th>ActivationTime 記述子</th><td>モジュールの有効化時間に関する情報。<br>
-																																												本記述子が存在しない時は、即有効とする。
-																																												</td></tr>
+<tr><th class=packname>タグ値</th><th class=packname>記述子名</th><th class=packname><span class=sosmall>モジュール情報領域</span></th><th class=packname><span class=sosmall>プライベート領域</span></th><th class=packname>機能</th></tr>
+<tr><th><a href=#typdsc name=tag01> 	0x01</a></th><th>Type 記述子</th>		<th>〇</th><th>ー</th><td>モジュールの型（MIME形式等）</td></tr>
+<tr><th><a href=#nmdsc name=tag02> 		0x02</a></th><th>Name 記述子</th>		<th>〇</th><th>ー</th><td>モジュール名（ファイル名）</td></tr>
+<tr><th><a href=#infdsc name=tag03> 	0x03</a></th><th>Info 記述子</th>		<th>〇</th><th>〇</th><td>モジュール情報（文字型）</td></tr>
+<tr><th><a href=#mdllnkdsc name=tag04>0x04</a></th><th>Module link 記述子</th><th>〇</th><th>ー</th><td>モジュール最大伝送サイズ（256Mbytes）を超えているモジュールの分割送出時のリンク情報（<a href=dsmccdii.html#mdlId>moduleId</a>）</td></tr>
+<tr><th><a href=#crcdsc name=tag05>	 	0x05</a></th><th>CRC32 記述子</th>		<th>〇</th><th>ー</th><td>伝送モジュール全体の CRC32</td></tr>
+<tr><th><a>0x06</a></th><th colspan=4>予約</th></tr>
+<tr><th><a href=#dwldtmdsc name=tag07>0x07</a></th><th>ダウンロード推定時間 記述子</th><th>〇</th><th>〇</th><td>ダウンロード推定所要時間（秒）</td></tr>
+<tr><th><a>0x08-0x70</a></th><th colspan=4>予約</th></tr>
+<tr><th><a href=#cchprio name=tag71>	 	0x71</a></th><th>キャシュ優先度 記述子</th>		<th>〇</th><th>ー</th><td>GEM1.2 B.2.1.1で要求されるモジュールのキャッシュの振る舞いに関する情報</td></tr>
+<tr><th><a>0x72-0x7f</a></th><th colspan=4>予約</th></tr>
+<tr><th><a>0x8f-0xbf</a></th><th colspan=4>事業者定義の記述子</th></tr>
+<tr><th><a href=#exprdsc name=tagc0>	 	0xc0</a></th><th>Expire 記述子</th><th>〇</th><th>〇</th><td>モジュールの有効期限に関する情報</td></tr>
+<tr><th><a href=#actvtmdsc name=tagc1>	0xc1</a></th><th>ActivationTime 記述子</th><th>〇</th><th>〇</th><td>モジュールの有効化時間に関する情報。<br>
+																																											本記述子が存在しない時は、即有効とする。
+																																											</td></tr>
+<tr><th><a href=#cmptypdsc name=tagc2>	0xc2</a></th><th>CompressionType 記述子</th><th>〇</th><th>ー</th><td>モジュールが圧縮されている場合、その圧縮アルゴリズムを示す。
+																																											</td></tr>
+<tr><th><a href=#cntrldsc name=tagc3>	0xc3</a></th><th>Control 記述子</th>				<th>〇</th><th>ー</th><td>モジュールの制御・解釈に必要な情報。
+																													      										</td></tr>
+<tr><th><a href=#prvdprvtdsc name=tagc4>	0xc4</a></th><th>ProviderPrivate 記述子</th><th>〇</th><th>〇</th><td>ネットワーク・放送事業者の独自補助情報。
+																													      										</td></tr>
+<tr><th><a href=#strrtdsc name=tagc5>	0xc5</a></th><th>StoreRoot 記述子</th><th>〇</th><th>〇</th><td>蓄積専用データサービスのコンテンツを蓄積する最上位ディレクトリ位置
+																											      										</td></tr>
+<tr><th><a href=#sbdirdsc name=tagc6>	0xc6</a></th><th>SubDirectory 記述子</th><th>〇</th><th>〇</th><td>蓄積専用データサービスのコンテンツを蓄積するサブディレクトリ位置
+																											      										</td></tr>
+<tr><th><a href=#ttldsc name=tagc7>	0xc7</a></th><th>Title 記述子</th>			<th>〇</th><th>〇</th><td>カルーセルで伝送される視聴用コンテンツモジュールの名称
+																											      								</td></tr>
+<tr><th><a href=#dtencdsc name=tagc8>	0xc8</a></th><th>DataEncoding 記述子</th><th>〇</th><th>ー</th><td>独自方式データのデータ符号化方式識別
+																											      								</td></tr>
+<tr><th><a href=#tmstptsdsc name=tagc9>	0xc9</a></th><th>タイムスタンプ付TS 記述子</th><th>〇</th><th>ー</th><td>MPEG映像音声をタイムスタンプ付TS にてカルーセル伝送する際のファイルの補助情報
+																											      								</td></tr>
+<tr><th><a href=#rtcerdsc name=tagca>	0xca</a></th><th>ルート証明書 記述子</th><th>〇</th><th>ー</th><td>ルート証明書を特定するための情報
+																											      								</td></tr>
+<tr><th><a href=#encrptdsc name=tagcb>	0xcb</a></th><th>Encrypt 記述子</th><th>〇</th><th>〇</th><td>暗号化されたモジュール（ARIB STD-B25 第2部）の識別・解釈に必要な情報
+																											      								</td></tr>
+<tr><th><a href=#acgdsc name=tagcc>	0xcc</a></th><th>ACG 記述子</th><th>〇</th><th>〇</th><td>限定再生処理における課金対象グループ（ARIB STD-B25 第2部）に関する情報
+																											      								</td></tr>
+<tr><th><a>0xcd-0xed</a></th><th colspan=4>予約</th></tr>
+<tr><th><a>0xee</a></th><th>MetadataFragment 記述子</th><th>ー</th><th>ー</th><td>ARIB STD-B38 (DDIへの配置無し)
+																											      								</td></tr>
+<tr><th><a>0xef</a></th><th>TransportLocation 記述子</th><th>ー</th><th>ー</th><td>ARIB STD-B24 第二編 付録規定 E (DDIへの配置無し)
+																											      								</td></tr>
+<tr><th><a>0xf0-0xff</a></th><th></th><th>ー</th><th>〇</th><td>符号化方式ごとにプライベート領域に挿入する記述子タグのために予約
+																											      								</td></tr>
 </table>
+
 
 <br>
 
-<h4><a name=typdsc>Ttpe 記述子</a></h4>
+<h4><a name=typdsc>Type 記述子</a></h4>
 <table border=1>
 	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
 	<tr><th>descriptor_tag</th><th>8</th><th>1</th><td>0x01</td></tr>
@@ -214,7 +245,214 @@
 </table>
 <a href=#tagc1>戻る</a>
 
+<h4><a name=cmptypdsc>CompressionType 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th>				<th>8</th><th>1</th><td>0xc2</td></tr>
+	<tr><th>descriptor_length</th>		<th>8</th><th>1</th><td>5</td></tr>
+	<tr><th>compression_type</th>			<th>8</th><th>1</th><td>
+																					圧縮形式を示す（運用規定）
+																					</td></tr>
+	<tr><th>original_dize</th>				<th>32</th><th>4</th><td>
+																					非圧縮時のモジュールバイトサイズ
+																					</td></tr>
+</table>
+<a href=#tagc2>戻る</a>
 
+<h4><a name=cntrldsc>Control 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th><th>8</th><th>1</th><td>0x01</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
+	<tr><th>control_data_byte</th><th>8*<span class=sosmall>descriptor_length</span></th><th><span class=sosmall>descriptor_length</span></th><td>
+																																					データ符号化ないしその運用規約等にて定義されるデータ構造
+																																					</td></tr>
+</table>
+<a href=#tagc3>戻る</a>
+
+<h4><a name=prvdprvtdsc>ProviderPrivate 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th>		<th>8</th><th>1</th><td>0xc4</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
+	<tr><th>private_scope_type</th><th>8</th><th>1</th><td>この記述子のスコープを示す識別子の種類</td></tr>
+	<tr><th>scope_identifier</th>	<th>32</th><th>4</th><td>スコープ種別毎のスコープ識別値<br>
+																								<table border=1>
+																									<tr><th>private_scope_type</th><th>scopr_identifier</th><th>bits</th><th>意味</th></tr>
+																									<tr><th>0x00</th><td></td><th></th><td>予約</td></tr>
+																									<tr><th rowspan="2">0x01</th>	<td>network_id</td><th>16</th><td rowspan="2">ネットワーク識別</td></tr>
+																									<tr>             							<td>padding(all1)</td><th>16</th></tr>
+																									<tr><th rowspan="2">0x02</th><td>network_id</td><th>16</th><td rowspan="2">サービス識別</td></tr>
+																									<tr>             							<td>service_id</td><th>16</th></tr>
+																									<tr><th rowspan="3">0x03</th><td>network_id</td><th>16</th><td rowspan="3">ブロードキャスト識別</td></tr>
+																									<tr>             							<td>broadcaster_id</td><th>8</th></tr>
+																									<tr>             							<td>padding(all1)</td><th>8</th></tr>
+																									<tr><th rowspan="2">0x04</th>	<td>bouquet_id</td><th>16</th><td rowspan="2">ブーケット識別</td></tr>
+																									<tr>             							<td>padding(all1)</td><th>16</th></tr>
+																									<tr><th rowspan="2">0x05</th>	<td>information_provider_id</td><th>16</th><td rowspan="2">情報提供者識別</td></tr>
+																									<tr>             							<td>padding(all1)</td><th>16</th></tr>
+																									<tr><th rowspan="2">0x06</th>	<td>CA_system_id</td><th>16</th><td rowspan="2">限定受信方式識別</td></tr>
+																									<tr>             							<td>padding(all1)</td><th>16</th></tr>
+																									<tr><th>0x07-0xff</th><td></td><th></th><td>予約</td></tr>
+																								</table>
+																								</td></tr>
+	<tr><th>private_byte</th><th>8*<span class=sosmall>(descriptor_length-5)</span></th><th><span class=sosmall>descriptor_length-5</span></th><td>
+																																					スコープ毎に決められた規則に基づく補助情報。
+																																					</td></tr>
+</table>
+<a href=#tagc4>戻る</a>
+
+<h4><a name=strrtdsc>StoreRoot 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th>		<th>8</th><th>1</th><td>0xc5</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
+	<tr><th>update_type</th><th>1</th><th>0.125</th><td>蓄積ディレクトリの内容に対して
+																											<ul>
+																												<li> 0 ::= 追記
+																												<li> 1 ::= 上書き
+																											</ul>
+																								</td></tr>
+	<tr><th>reserved</th>		<th>7</th><th>0.875</th><td><br>
+																								</td></tr>
+	<tr><th>store_root_path</th><th>8*<span class=sosmall>(descriptor_length-1)</span></th><th><span class=sosmall>descriptor_length-1</span></th><td>
+																																					蓄積先の最上位ディレクトリを示す。
+																																					</td></tr>
+</table>
+<a href=#tagc5>戻る</a>
+
+<h4><a name=sbdirdsc>SubDirectory 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th>		<th>8</th><th>1</th><td>0xc6</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
+	<tr><th>subdirectory_path</th><th>8*<span class=sosmall>descriptor_length</span></th><th><span class=sosmall>descriptor_length</span></th><td>
+																																					StoreRootで指定されるディレクトリ配下のサブディレクトリを示す。
+																																					</td></tr>
+</table>
+<a href=#tagc6>戻る</a>
+
+<h4><a name=ttldsc>Title 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th>		<th>8</th><th>1</th><td>0xc7</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
+	<tr><th>ISO_639_language_code</th><th>24</th><th>3</th><td>以降に続く text_char の3文字言語識別</td></tr>
+	<tr><th>text_char</th><th>8*<span class=sosmall>(descriptor_length-3)</span></th><th><span class=sosmall>descriptor_length-3</span></th><td>
+																																					視聴用コンテンツモジュールの名称（視聴者への提示用）
+																																					</td></tr>
+</table>
+<a href=#tagc7>戻る</a>
+
+<h4><a name=dtencdsc>DataEncoding 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th>		<th>8</th><th>1</th><td>0xc8</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
+	<tr><th>data_component_id</th><th>16</th><th>2</th><td>データ符号化方式記述子（平成23年総務省告示299号）のデータ符号化方式識別フィールドに割り当てられた値</td></tr>
+	<tr><th>addtional_data_encoding_info</th><th>8*<span class=sosmall>(descriptor_length-2)</span></th><th><span class=sosmall>descriptor_length-2</span></th><td>
+																																					識別番号の拡張や符号化方式ごとの補足情報を格納
+																																					</td></tr>
+</table>
+<a href=#tagc8>戻る</a>
+
+<h4><a name=tmstptsdsc>タイムスタンプ付TS 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=2></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th colspan=2>descriptor_tag</th>		<th>8</th><th>1</th><td>0xc9</td></tr>
+	<tr><th colspan=2>descriptor_length</th><th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
+	<tr><th colspan=2>TSbitrate</th><th>32</th><th>4</th><td>該当トランスポートストリームのビットレート（by 1Hz）指定。可変ビットレート時は最大値指定。</td></tr>
+	<tr><th colspan=2>reserved</th><th>3</th><th>0.375</th><td></td></tr>
+	<tr><th colspan=2>PCR_PID</th><th>13</th><th>1.625</th><td>本ストリーム再生に使用するPCRを伝送するストリームのPID</td></tr>
+	<tr><th colspan=2>default_video_flag</th><th>1</th><th>0.125</th><td>
+																										<ul>
+																											<li> 0 ::= デフォルトで再生すべき映像ストリームの PID 有り
+																											<li> 1 ::= デフォルトで再生すべき映像ストリーム無し
+																										</ul>
+																										</td></tr>
+	<tr><th colspan=2>default_audio_flag</th><th>1</th><th>0.125</th><td>
+																										<ul>
+																											<li> 0 ::= デフォルトで再生すべき音声ストリームの PID 有り
+																											<li> 1 ::= デフォルトで再生すべき音声ストリーム無し
+																										</ul>
+																										</td></tr>
+	<tr><th colspan=2>timestampedTS_PBctrl_info_flag</th><th>1</th><th>0.125</th><td>
+																										<ul>
+																											<li> 0 ::= partialTS再生成語情報の URI 有り
+																											<li> 1 ::= partialTS再生成語情報無し
+																										</ul>
+																										</td></tr>
+	<tr></tr>
+	<tr><th rowspan="2">default_video_flag == 0</th><th>reserved</th><th>3</th><th>0.375</th><td></td></tr>
+	<tr>																						<th>videoPID</th><th>13</th><th>1.625</th><td>デフォルトで再生される映像ストリームのPID</td></tr>
+	<tr><th rowspan="2">default_audio_flag == 0</th><th>reserved</th><th>3</th><th>0.375</th><td>デフォルトで再生される音声ストリームのPID</td></tr>
+	<tr>																						<th>videoPID</th><th>13</th><th>1.625</th><td></td></tr>
+	<tr><th rowspan="3">default_audio_flag == 0</th><th>reserved</th><th>3</th><th>0.375</th><td></td></tr>
+	<tr>																						<th>text_length</th><th>8</th><th>1</th><td>次に続く text_ch 領域のバイトサイズ</td></tr>
+	<tr>																						<th>text_ch</th><th>8*text_length</th><th>text_length</th><td>タイムスタンプ付TS再生制御情報へのURL</td></tr>
+</table>
+<a href=#tagc9>戻る</a>
+
+<h4><a name=rtcerdsc>ルート証明書 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=3></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th colspan=3>descriptor_tag</th>				<th>8</th><th>1</th><td>0xca</td></tr>
+	<tr><th colspan=3>descriptor_length</th>		<th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
+	<tr><th colspan=3>root_certificate_type</th><th>1</th><th>0.125</th><td>
+																																<ul>
+																																	<li> 0 ::= 該当ルート証明書は汎用証明書
+																																	<li> 1 ::= 事業者専用証明書
+																																</ul>
+																																</td></tr>
+	<tr><th colspan=3>reserved</th>							<th>7</th><th>0.875</th><td></td></tr>
+	<tr><th rowspan="2">root_certificate_type == 0</th><th rowspan="2">*N<br>N=((<span class=sosmall>descriptor_length</span>-1)/8)</th><th>root_certificate_id</th>	<th>32</th><th>4</th><td>
+		<ul>
+			<li> 0xffffffff ::= 対応するルート証明書記憶領域へ格納するルート証明書は、このモジュールには含まれない
+			<li> 0xffffffff ::&ne;  対応するルート証明書記憶領域へ格納するルート証明書がこのモジュールに含まれる（運用にて規定）
+		</ul>
+	</td></tr>
+	<tr>																																																																<th>root_certificate_id</th>	<th>32</th><th>4</th><td>
+		root_certificate_idで識別される単位でのルート証明書のバージョン。<br>ただし、 root_certificate_id = 0xffffffff の時は常に 0xffffffff とする。
+	</td></tr>
+	<tr><th rowspan="1">root_certificate_type == 1</th><th>〃</th>																<th>reserved</th>						<th>64</th><th>8</th><td></td></tr>
+</table>
+<a href=#tagca>戻る</a>
+
+<h4><a name=encrptdsc>Encrypt 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th>		<th>8</th><th>1</th><td>0xcb</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>1</td></tr>
+	<tr><th>encrypt_id</th>				<th>8</th><th>1</th><td>暗号化アルゴリズムを識別する</td></tr>
+</table>
+<a href=#tagcb>戻る</a>
+
+<h4><a name=acgdsc>ACG 記述子</a></h4>
+<table border=1>
+	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
+	<tr><th>descriptor_tag</th>		<th>8</th><th>1</th><td>0xcb</td></tr>
+	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
+	<tr><th>CA_content_id</th>		<th>32</th><th>4</th><td>アクセス制御グループを識別する</td></tr>
+	<tr><th>CA_system_id</th>			<th>16</th><th>2</th><td>限定再生方式を識別する</td></tr>
+	<tr><th>ACI_URI_length</th>		<th>8</th><th>1</th><td>続く ACI_URI_path 領域のバイト長</td></tr>
+	<tr><th>ACI_URI_path</th>			<th>8*<span class=sosmall>ACI_URI_length</span></th><th><span class=sosmall>ACI_URI_length</span></th><td>
+																														課金単位コンテンツ識別により指定された課金単位コンテンツに対応するACIの所在を示す
+																														</td></tr>
+	<tr><th>fee_name_length</th>	<th>8</th><th>1</th><td>続く fee_name 領域のバイト長</td></tr>
+	<tr><th>ACI_URI_path</th>			<th>8*<span class=sosmall>fee_name_length</span></th><th><span class=sosmall>fee_name_length</span></th><td>
+																														視聴者向け課金単位コンテンツの名称、料金を表す
+																														</td></tr>
+	<tr><th>content_URI_length</th>	<th>8</th><th>1</th><td>続く content_URI_path 領域のバイト長</td></tr>
+	<tr><th>content_URI_path</th>			<th>8*<span class=sosmall>content_URI_length</span></th><th><span class=sosmall>content_URI_length</span></th><td>
+																														課金単位コンテンツ内の最初に提示すべきコンテンツの所在を示す
+																														</td></tr>
+	<tr><th>privateDatalength</th>	<th>8</th><th>1</th><td>続く privateDataByte 領域のバイト長</td></tr>
+	<tr><th>privateDataByte</th>			<th>8*<span class=sosmall>privateDatalength</span></th><th><span class=sosmall>privateDatalength</span></th><td>
+																														記述子形式にて、データ符号化方式にて定義されるデータ構造や事業者ごとに定義されるデータ構造が格納される
+																														</td></tr>
+
+</table>
+<a href=#tagcc>戻る</a>
 
 </div>
 </section>

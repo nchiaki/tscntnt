@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TSパケット:DSM-CC:DII
+</title>
+<!-- content属性にページの紹介文を記述 -->
+<meta name="description" content="TSペイロード:DSM-CC:DDB">
+<!-- content属性にページの著者情報を記述 -->
+<meta name="author" content="chiaki">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="tsstyle.css" type="text/css">
+
+</head>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+<body class=bdybck>
+<h1><a href="index.html">TSパケット</a>:<a href=tsdsmccsct.html>DSM-CC</a>:DDB</h1>
+
+<div>STD-B24 3/3<div>
+<hr>
+<h2>DDB</h2>
+<section>
+<div>
+
+
+<table border=1>
+<tr><th colspan=6 class=packname>DownloadDataBlock()</th></tr>
+<tr class=bits><th colspan=3></th><th>bits</th><th>bytes</th><td></td></tr>
+<tr><th rowspan=9>dsmccDownloadDataHeader()</th><th colspan=2>protocolDiscriminator</th><th>8</th><th>1</th><td>0x11 (MPEG-2 DSM-CC メッセージ)</td></tr>
+<tr>																						<th colspan=2>dsmccType</th>						<th>8</th><th>1</th><td>0x03 (U-Nダウンロード メッセージ)</td></tr>
+<tr>																						<th colspan=2>messageId</th>						<th>16</th><th>2</th><td>0x1003</td></tr>
+<tr>																						<th colspan=2>downloadId</th>						<th>32</th><th>4</th><td><a href=dsmccdii.html>DII</a>メッセージ中のダウンロード識別と同じ</td></tr>
+<tr>																						<th colspan=2>reserved</th>							<th>8</th><th>1</th><td></td></tr>
+<tr>																						<th colspan=2>adaptationLength</th>			<th>8</th><th>1</th><td>dsmccAdaptationHeader()領域のバイト数</td></tr>
+<tr>																						<th colspan=2>messageLength</th>				<th>16</th><th>2</th><td>このフィールド直後からのメッセージのバイト数</td></tr>
+<tr>																						<th rowspan=2>0 < adaptationLength<br>
+																										dsmccAdaptationHeader()
+																								</th><th>adaptationType</th><th>8</th><th>1</th><td>
+																																														<ul>
+																																															<li> 0x00-0x7f : 予約
+																																															<li> 0x80-0xff : ユーザ定義
+																																														</ul>
+																																														</td></tr>
+<tr>																						<th>adaptationDataByte</th><th>8*(<span class=sosmall>adaptationLength-1</span>)</th><th><span class=sosmall>adaptationLength-1</span></th><td>事業者任意</td></tr>
+<tr><th colspan=3>moduleId</th>			<th>16</th><th>2</th><td>このブロックが所属するモジュールの識別番号</td></tr>
+<tr><th colspan=3>moduleVersion</th><th>8</th><th>1</th><td>このブロックが所属するモジュールのバージョン</td></tr>
+<tr><th colspan=3>reserved</th>			<th>8</th><th>1</th><td></td></tr>
+<tr><th colspan=3>blockNumber</th>	<th>16</th><th>2</th><td>モジュール内における本ブロックの位置。先頭は 0</td></tr>
+<tr><th colspan=3>blockDataByte</th><th>8*()</th><th></th><td>一連のブロックデータ領域はモジュールを分割したブロックデータ長である<a href=dsmccdii.html>DII</a>のブロックサイズに等しい。<br>
+																								ただし、ブロック番号が最後場合は、<a href=dsmccdii.html>DII</a>で記述したブロックサイズより小さくてもよい。
+																								</td></tr>
+
+</table>
+</div>
+</section>
+<hr>
+<div>STD-B24 3/3<div>
+<div class=signa>By chiaki</div>
+</body>
