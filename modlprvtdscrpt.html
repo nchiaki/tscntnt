@@ -100,6 +100,7 @@
 																																						<li>限定受信方式：ARIB STD-B25 第2部
 																																						<li>サーバー型放送形式：ARIB STD-B38
 																																					</ul>
+																																					例）text/X-arib-bml
 																																					</td></tr>
 </table>
 <a href=#tag01>戻る</a>
@@ -111,7 +112,8 @@
 	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
 	<tr><th>text_char</th><th>8*<span class=sosmall>descriptor_length</span></th><th><span class=sosmall>descriptor_length</span></th><td>
 																																					モジュールとして伝送するファイルのファイル名<br>
-																																					ModuleLink記述子が存在する場合は、ModuleLink記述子 position 0x00 のモジュールにのみ本記述子を記述する。
+																																					ModuleLink記述子が存在する場合は、ModuleLink記述子 position 0x00 のモジュールにのみ本記述子を記述する。<br>
+																																					例） startup.bml
 																																					</td></tr>
 </table>
 <a href=#tag02>戻る</a>
@@ -121,9 +123,12 @@
 	<tr class=bits><th colspan=1></th><th>bits</th><th>bytes</th><td></td></tr>
 	<tr><th>descriptor_tag</th><th>8</th><th>1</th><td>0x03</td></tr>
 	<tr><th>descriptor_length</th><th>8</th><th>1</th><td>以降に続く記述子データのバイトサイズ</td></tr>
-	<tr><th>ISO_639_language_code</th><th>24</th><th>3</th><td>ISO639-2 3文字 言語コード</td></tr>
+	<tr><th>ISO_639_language_code</th><th>24</th><th>3</th><td>ISO639-2 3文字 言語コード<br>
+																												例） jpn
+																												</td></tr>
 	<tr><th>text_char</th><th>8*<span class=sosmall>(descriptor_length-3)</span></th><th><span class=sosmall>(descriptor_length-3)</span></th><td>
-																																					モジュールとして伝送するファイルに関する文字列情報
+																																					モジュールとして伝送するファイルに関する文字列情報<br>
+																																					例） Shift_JIS, euc-jp, utf-8
 																																					</td></tr>
 </table>
 <a href=#tag03>戻る</a>
