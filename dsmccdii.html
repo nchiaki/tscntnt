@@ -39,7 +39,8 @@
 <tr>																			<th colspan=2>reserved</th>						<th>8</th><th>1</th><td>---</td></tr>
 <tr>															<th colspan=2>adaptationLength</th>						<th>8</th><th>1</th><td>以降の dsmccAdaptationHeader()領域 のバイトサイズ</td></tr>
 <tr>															　<th colspan=2>messageLength</th>						<th>16</th><th>2</th><td>このフィールド直後からのメッセージのバイトサイズ</td></tr>
-<tr>											<th rowspan=2>dsmccAdaptationHeader()</th><th>adaptationType</th><th>8</th><th>1</th><td>アダプテーションの型を示す<br>
+<tr>											<th rowspan=2>0 < adaptationLength<br>
+																				dsmccAdaptationHeader()</th><th>adaptationType</th><th>8</th><th>1</th><td>アダプテーションの型を示す<br>
 																																																							0x00 - 0x7f : 予約済み（by ISO/IEC13818-6）<br>
 																																																							0x80 - 0xff : ユーザ定義
 																																																							</td></tr>
@@ -54,9 +55,11 @@
 <tr><th colspan=3>                     ackPeriod</th><th>8</th><th>1</th><td>0(未使用)</td></tr>
 <tr><th colspan=3>              tCDownloadWindow</th><th>32</th><th>4</th><td>0(未使用)</td></tr>
 <tr><th colspan=3>            tCDownloadScenario</th><th>32</th><th>4</th><td>ダウンロード開始から終了までのタイムアウト時間（&micro;秒）</td></tr>
-<tr><th rowspan=1>compatibilityDescriptor()</th><th colspan=2>descriptorCount</th><th>32</th><th>4</th><td>本データ不要時は 0 </td></tr>
+<tr><th rowspan=3><a href=diicmptbltydescrptr.html>compatibilityDescriptor()</a></th><th colspan=2>compatibilityDescriptorLength</th><th>16</th><th>2</th><td>本データ不要時は 2 </td></tr>
+<tr>																						<th colspan=2>descriptorCount</th><th>16</th><th>2</th><td>本データ不要時は 0 </td></tr>
+<tr>																						<th colspan=2>&brvbar;</th><th>8*<span class=sosmall>(compatibilityDescriptorLength-2)</span></th><th><span class=sosmall>(compatibilityDescriptorLength-2)</span></th><td></td></tr>
 <tr><th colspan=3>               numberOfModules</th><th>16</th><th>2</th><td>以降に続く（privateDataLength手前迄）モジュールの件数</td></tr>
-<tr><th rowspan=5>numberOfModules X </th><th colspan=2><a name=mdlId>moduleId</a></th><th>16</th><th>2</th><td>モジュール識別</td></tr>
+<tr><th rowspan=5>numberOfModules * </th><th colspan=2><a name=mdlId>moduleId</a></th><th>16</th><th>2</th><td>モジュール識別</td></tr>
 <tr>																		<th colspan=2>moduleSize</th><th>32</th><th>4</th><td>モジュールのバイト長（不定時は 0 ）</td></tr>
 <tr>																		<th colspan=2>moduleVersion</th><th>8</th><th>1</th><td>モジュールのバージョン</td></tr>
 <tr>																		<th colspan=2>moduleInfoLength</th><th>8</th><th>1</th><td>次に続くモジュール情報領域のバイト長</td></tr>

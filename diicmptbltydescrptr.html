@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TSパケット:DSM-CC:DII:CompatibilityDescriptor
+</title>
+<!-- content属性にページの紹介文を記述 -->
+<meta name="description" content="TSペイロード:DSM-CC:DII:CompatibilityDescriptor">
+<!-- content属性にページの著者情報を記述 -->
+<meta name="author" content="chiaki">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="tsstyle.css" type="text/css">
+
+</head>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+<body class=bdybck>
+<h1><a href="index.html">TSパケット</a>:<a href=tsdsmccsct.html>DSM-CC</a>:<a href=dsmccdii.html>DII</a>:CompatibilityDescriptor</h1>
+
+<div>STD-B21<div>
+<hr>
+<h2>CompatibilityDescriptor</h2>
+<section>
+<div>
+<table border=1>
+<tr><th colspan=6 class=packname>CompatibilityDescriptor()</th></tr>
+<tr class=bits><th colspan=3></th><th>bits</th><th>bytes</th><td></td></tr>
+<tr><th colspan=3>compatibilityDescriptorLength	</th><th>16</th><th>2</th><td>本データ不要時は 2 </td></tr>
+<tr><th colspan=3>descriptorCount								</th><th>16</th><th>2</th><td>本データ不要時は 0 </td></tr>
+<tr><th rowspan=10>descriptorCount *</th><th colspan=2>descriptorType</th><th>8</th><th>1</th><td>同一の descriptorType 出現においては「OR」扱い</td></tr>
+<tr>																		<th colspan=2>descriptorLength</th><th>8</th><th>1</th><td>続く本デスクリプタデータのバイトサイズ</td></tr>
+<tr>																		<th colspan=2>specifierType</th><th>8</th><th>1</th><td>0xff, 0xfe, 0xfd, 0xfc のいずれか</td></tr>
+<tr>																		<th colspan=2>specifierData()</th><th>24</th><th>3</th><td>0x819282</td></tr>
+<tr>																		<th colspan=2>model</th><th>16</th><th>2</th><td>
+																																											specifierTypeが
+																																											<ul>
+																																											<li>0xff ::= 上位8bits:maker_id 下位8buts:model_id
+																																											<li>0xfe ::= 拡張maker_id
+																																											<li>0xfd ::= 限定受信器の更新<span class=sosmall>(*2)</span>
+																																											<li>0xfc ::= 受信機共通データ（拡張用）<span class=sosmall>(*2)</span>
+																																											</ul>
+																																											*2: table_id_ext の上位8bits が 0xff 以外の受信機共通データ
+																																										</td></tr>
+<tr>																		<th colspan=2>version</th><th>16</th><th>2</th><td>上位4bits:group_id 下位12bits:version_id </td></tr>
+<tr>																		<th colspan=2>subDescriptorCount</th><th>8</th><th>1</th><td></td></tr>
+<tr>																		<th rowspan=3>subDescriptor()<br>
+																											(subDescriptorCount *)</th><th>subDescriptorType</th><th>8</th><th>1</th><td></td></tr>
+<tr>																														<th>subDescriptorLength</th><th>8</th><th>1</th><td></td></tr>
+<tr>																														<th>additionalInformation</th><th>8*<span>subDescriptorLength</span></th><th><span>subDescriptorLength</span></th><td>
+	specifierTypeが
+	<ul>
+		<li>0xfe ::= 拡張maker_id に対応する model_id を記載する
+		<li>0xfd ::= 補足分類などを記載する
+	</ul>
+</td></tr>
+</table>
+
+</div>
+</section>
+<hr>
+<div>STD-B21<div>
+<div class=signa>By chiaki</div>
+</body>
